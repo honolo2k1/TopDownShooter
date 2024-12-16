@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1e4902e1e1cc64baab074620ef2079, type: 3}
+  m_Name: Rifle_D
+  m_EditorClassIdentifier: 
+  WeaponType: 4
+  FireRate: 1
+  MinBulletPerAttack: 1
+  MaxBulletPerAttack: 1
+  MinWeaponCooldown: 2
+  MaxWeaponCooldown: 3
+  BulletDamage: 35
+  BulletSpeed: 35
+  WeaponSpread: 0

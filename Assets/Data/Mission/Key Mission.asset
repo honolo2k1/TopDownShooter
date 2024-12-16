@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 308a8c08cd4ec444cb2b66d8843960df, type: 3}
+  m_Name: Key Mission
+  m_EditorClassIdentifier: 
+  MissionLevels:
+  - {fileID: 4403784526000230697, guid: 4b1d32d0f4d497449be3c27155d38d1c, type: 3}
+  MissionName: The Key To Flight
+  MissionDescription: You must locate and defeat the key-holder to retrieve the key.
+    Be caution, as this enemy is might be heavily guarded.
+  key: {fileID: 711255755582995818, guid: f9fb21ca49fc4d34fab7e899c8ad594f, type: 3}

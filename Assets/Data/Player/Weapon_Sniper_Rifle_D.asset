@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656a9615156140d46a9c8c6ee67ceae6, type: 3}
+  m_Name: Weapon_Sniper_Rifle_D
+  m_EditorClassIdentifier: 
+  WeaponName: Sniper
+  BulletDamage: 80
+  ShootType: 0
+  BulletPerShot: 1
+  FireRate: 1.5
+  BurstAvalible: 0
+  BurstActive: 0
+  BurstBulletsPerShot: 0
+  BurstFireRate: 0
+  BurstFireDelay: 0.1
+  BulletsInMagazine: 12
+  MagazineCapacity: 12
+  TotalReverseAmmo: 60
+  BaseSpread: 0
+  MaxSpread: 0
+  SpreadIncreaseRate: 0.15
+  WeaponType: 4
+  ReloadSpeed: 1
+  EquipmentSpeed: 1
+  GunDistance: 25
+  CameraDistance: 8.5
+  WeaponIcon: {fileID: -664407478, guid: 3477fe9a26e0faa42b5a9b5b258229c1, type: 3}
+  WeaponInfo: Good on a big distance
