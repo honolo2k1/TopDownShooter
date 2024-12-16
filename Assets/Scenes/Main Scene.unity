@@ -14854,7 +14854,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1101225907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16375,7 +16375,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: IN DEVELOPMENT
+  m_text: "WASD: Movement\nLeft Click: Shoot\nRight Click: Aim \nR: Reload\nF: Pick
+    up/ Get into the car/ Get out of the car\nG: Drop\nESC: Pause\nSpace: Brake\nL:
+    Full Blood, ammo\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cf011e298c519564eba0377fbf2d5aed, type: 2}
   m_sharedMaterial: {fileID: 4741953551006703088, guid: cf011e298c519564eba0377fbf2d5aed, type: 2}
@@ -16402,8 +16404,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
