@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Camera CameraForAim;
+    [SerializeField] private Camera MainCamera;
     public static GameManager Instance;
     public Player Player;
     public bool IsCursorOn;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        CameraForAim.fieldOfView = MainCamera.fieldOfView;
         IsCursorOn = Cursor.visible;
     }
     public void GameStart()

@@ -98,9 +98,12 @@ public class Enemy : MonoBehaviour
         EnterBattleMode();
         health.ReduceHealth(damage);
 
+        health.UpdateHeathUI(health.CurrentHealth, health.MaxHealth);
+
         if (health.ShouldDie())
         {
             Die();
+            health.HealthBar.SetActive(false);
         }
     }
     public virtual void Die()

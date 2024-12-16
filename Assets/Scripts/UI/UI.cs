@@ -40,6 +40,8 @@ public class UI : MonoBehaviour
             LevelGenarator.Instance.InitGeneration();
             StartTheGame();
         }
+
+        SettingsUI.LoadSettings();
     }
     public void SwitchToUI(GameObject uiToSwitchOn)
     {
@@ -97,6 +99,7 @@ public class UI : MonoBehaviour
 
     public void ShowVictoryScreenUI()
     {
+        Cursor.visible = true;
         StartCoroutine(ChangeImageAlpha(1, 1.5f, SwitchToVictorySreenUI));
     }
 
