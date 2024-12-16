@@ -14,6 +14,8 @@ public class UI : MonoBehaviour
     public GameObject VictoryScreenUI;
     public GameObject PauseUI;
 
+    public MinimapSettings MiniMap;
+
     [SerializeField] GameObject[] UIElements;
 
     [Header("Fade Image")]
@@ -60,6 +62,7 @@ public class UI : MonoBehaviour
         if (uiToSwitchOn == InGameUI.gameObject)
         {
             ControlsManager.Instance.SwitchToCharacterControls();
+            MiniMap.InitMiniMap(MiniMap.CameraHeight);
         }
     }
     public void StartTheGame() => StartCoroutine(StartGameSequence());

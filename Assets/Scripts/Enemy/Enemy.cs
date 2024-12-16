@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     public EnemyType EnemyType;
     public LayerMask WhatIsAlly;
     public LayerMask WhatIsPlayer;
+
+    [SerializeField] private GameObject miniMapDot;
     [Space]
     [Header("Idle Date")]
     public float IdleTime;
@@ -110,6 +112,7 @@ public class Enemy : MonoBehaviour
     {
         dropController.DropItem();
 
+        miniMapDot.SetActive(false);
 
         anim.enabled = false;
         agent.isStopped = true;
