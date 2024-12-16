@@ -12489,7 +12489,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 50.350628
+  field of view: 50.350536
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -12516,7 +12516,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.970941, z: -10.201105}
+  m_LocalPosition: {x: -0.06, y: 6.9709563, z: -10.201116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17678,7 +17678,7 @@ Transform:
   m_GameObject: {fileID: 1275633000}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.970941, z: -10.201105}
+  m_LocalPosition: {x: -0.06, y: 6.9709563, z: -10.201116}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18311,7 +18311,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 8.509947
+  m_CameraDistance: 8.509965
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -37188,8 +37188,8 @@ MonoBehaviour:
   HoldType: 3
   gunPoint: {fileID: 1937955366}
   holdPoint: {fileID: 1225812866}
-  FireSFX: {fileID: 0}
-  ReloadSfx: {fileID: 0}
+  FireSFX: {fileID: 1354366608}
+  ReloadSfx: {fileID: 453857184}
 --- !u!4 &7416008617370165018
 Transform:
   m_ObjectHideFlags: 0
