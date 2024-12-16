@@ -5686,6 +5686,7 @@ MonoBehaviour:
   CurrentHealth: 0
   healthBar: {fileID: 7019900117727252120}
   HealthBar: {fileID: 2545398826982195343}
+  FloatingTextPrefab: {fileID: 8966603063314789203, guid: 64cee486af365824a99e68c5d8e30156, type: 3}
 --- !u!114 &6074944057990702564
 MonoBehaviour:
   m_ObjectHideFlags: 0

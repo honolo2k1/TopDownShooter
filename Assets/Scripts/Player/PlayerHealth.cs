@@ -1,6 +1,15 @@
+
+using TMPro;
+using UnityEngine;
+
+
 public class PlayerHealth : HealthController
 {
     private Player player;
+
+
+    public GameObject FloatingTextPrefab;
+
     public bool IsDead { get; private set; }
     protected override void Awake()
     {
@@ -10,15 +19,30 @@ public class PlayerHealth : HealthController
     public override void ReduceHealth(int damage)
     {
         base.ReduceHealth(damage);
+
+        if (FloatingTextPrefab != null)
+        {
+            ShowFloatingText(damage);
+        }
+
         if (ShouldDie())
             Die();
 
         UI.Instance.InGameUI.UpdateHeathUI(CurrentHealth, MaxHealth);
     }
+
+    private void ShowFloatingText(int damage)
+    {
+        var floatingText = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        var text = floatingText.GetComponent<TextMeshPro>();
+
+        text.text = $"-{damage}";
+        text.color = Color.cyan;
+    }
     private void Die()
     {
         if (IsDead)
-            { return; }
+        { return; }
 
         IsDead = true;
         player.anim.enabled = false;

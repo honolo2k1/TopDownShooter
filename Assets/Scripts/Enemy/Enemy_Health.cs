@@ -8,6 +8,8 @@ public class Enemy_Health : HealthController
 {
     [SerializeField] private Image healthBar;
     public GameObject HealthBar;
+
+    public GameObject FloatingTextPrefab;
     private void Update()
     {
         HealthBar.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);

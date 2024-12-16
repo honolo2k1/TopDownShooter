@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using static Enums;
@@ -101,6 +103,10 @@ public class Enemy : MonoBehaviour
         health.ReduceHealth(damage);
 
         health.UpdateHeathUI(health.CurrentHealth, health.MaxHealth);
+        if (health.FloatingTextPrefab != null)
+        {
+            ShowFloatingText(damage);
+        }
 
         if (health.ShouldDie())
         {
@@ -108,6 +114,13 @@ public class Enemy : MonoBehaviour
             health.HealthBar.SetActive(false);
         }
     }
+
+    private void ShowFloatingText(int damage)
+    {
+        var floatingText = Instantiate(health.FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        floatingText.GetComponent<TextMeshPro>().text = $"-{damage}";
+    }
+
     public virtual void Die()
     {
         dropController.DropItem();
