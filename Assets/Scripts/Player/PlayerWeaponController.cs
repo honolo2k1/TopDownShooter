@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.Intrinsics;
 using UnityEngine;
 using static Enums;
 
@@ -198,17 +199,18 @@ public class PlayerWeaponController : MonoBehaviour
     {
         Transform aim = player.aim.Aim();
 
+        //if (player.aim.Target() != null)
+        //{
+        //    weaponHolder.LookAt(aim);
+        //    GunPoint().LookAt(aim);
+        //}
+
         Vector3 direction = (aim.position - GunPoint().position).normalized;
 
-        if (player.aim.CanAimPrecisly() == false)
-        {
-            direction.y = 0;
-
-        }
-
-        //weaponHolder.LookAt(aim);
-        //gunPoint.LookAt(aim);
-
+        //if (!player.aim.CanAimPrecisly())
+        //{
+        //    direction.y = 0;
+        //}
         return direction;
     }
 

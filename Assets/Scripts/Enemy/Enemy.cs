@@ -99,6 +99,11 @@ public class Enemy : MonoBehaviour
 
     public virtual void GetHit(int damage)
     {
+        if (health.IsDead)
+        {
+            return;
+        }
+
         EnterBattleMode();
         health.ReduceHealth(damage);
 
@@ -111,7 +116,6 @@ public class Enemy : MonoBehaviour
         if (health.ShouldDie())
         {
             Die();
-            health.HealthBar.SetActive(false);
         }
     }
 
@@ -132,6 +136,8 @@ public class Enemy : MonoBehaviour
         agent.enabled = false;
 
         ragdoll.RagdollActive(false);
+
+        health.HealthBar.SetActive(false);
 
         MissionObject_HuntTarget huntTarget = GetComponent<MissionObject_HuntTarget>();
         huntTarget?.InvokeOnTargetKilled();

@@ -130,11 +130,20 @@ public class PlayerAim : MonoBehaviour
 
     private void UpdateAimPosition()
     {
+        Transform target = Target();
+
+        if (target != null)
+        {
+            aim.position = target.position;
+            return;
+        }
+
+
         aim.position = GetMouseHitInfo().point;
 
         Vector3 newAimPosion = isAimingPrecisly ? aim.position : transform.position;
 
-        aim.position = new Vector3(aim.position.x, newAimPosion.y + AjustOffsetY(), aim.position.z);
+        aim.position = new Vector3(aim.position.x, newAimPosion.y/* + AjustOffsetY()*/, aim.position.z);
     }
 
     private float AjustOffsetY()
@@ -193,6 +202,19 @@ public class PlayerAim : MonoBehaviour
 
         return lastKnownMouseHit;
     }
+    public Transform Target()
+    {
+        Transform target = null;
+
+        Debug.LogError(GetMouseHitInfo().transform.gameObject.name);
+        if (GetMouseHitInfo().transform.gameObject.GetComponentInParent<Enemy>() != null)
+        {
+            target = GetMouseHitInfo().transform;
+        }
+
+        return target;
+    }
+
 
     public Transform Aim() => aim;
     public bool CanAimPrecisly() => isAimingPrecisly;

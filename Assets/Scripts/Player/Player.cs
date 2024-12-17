@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+﻿using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -68,5 +68,18 @@ public class Player : MonoBehaviour
             weapon.CurrentWeapon().BulletsInMagazine = weapon.CurrentWeapon().TotalReverseAmmo;
             UI.Instance.InGameUI.UpdateWeaponUI(weapon.weaponSlots, weapon.currentWeapon);
         }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            // Tìm tất cả các đối tượng Enemy trên Scene
+            var enemies = FindObjectsOfType<Enemy>();
+
+            // Duyệt qua từng Enemy và gọi hàm GetHit
+            foreach (var enemy in enemies)
+            {
+                enemy.GetHit(100000);
+            }
+        }
+
     }
 }
