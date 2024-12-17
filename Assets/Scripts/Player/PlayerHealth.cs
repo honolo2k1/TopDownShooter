@@ -37,7 +37,6 @@ public class PlayerHealth : HealthController
         var text = floatingText.GetComponent<TextMeshPro>();
 
         text.text = $"-{damage}";
-        text.color = Color.cyan;
     }
     private void Die()
     {

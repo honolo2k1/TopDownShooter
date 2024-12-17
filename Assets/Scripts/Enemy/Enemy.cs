@@ -103,7 +103,7 @@ public class Enemy : MonoBehaviour
         health.ReduceHealth(damage);
 
         health.UpdateHeathUI(health.CurrentHealth, health.MaxHealth);
-        if (health.FloatingTextPrefab != null)
+        if (health.FloatingTextPrefab != null && !health.IsDead)
         {
             ShowFloatingText(damage);
         }

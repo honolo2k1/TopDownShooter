@@ -6636,6 +6636,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 100
   CurrentHealth: 0
+  IsDead: 0
   FloatingTextPrefab: {fileID: 8966603063314789203, guid: 64cee486af365824a99e68c5d8e30156, type: 3}
 --- !u!114 &491080959
 MonoBehaviour:
@@ -10597,7 +10598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.60784316, g: 0.65882355, b: 0.7137255, a: 1}
+  m_Color: {r: 0.89411765, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -12492,7 +12493,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 50.350487
+  field of view: 50.350388
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -12519,7 +12520,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.970963, z: -10.20112}
+  m_LocalPosition: {x: -0.06, y: 6.9709797, z: -10.201132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14854,7 +14855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1101225907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17690,7 +17691,7 @@ Transform:
   m_GameObject: {fileID: 1275633000}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.970963, z: -10.20112}
+  m_LocalPosition: {x: -0.06, y: 6.9709797, z: -10.201132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18323,7 +18324,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 8.509974
+  m_CameraDistance: 8.509994
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0

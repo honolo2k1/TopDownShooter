@@ -16,7 +16,7 @@ public class PlayerAim : MonoBehaviour
     [Space]
 
     [Header("Aim Setup")]
-    [SerializeField] private Transform aim;
+    public Transform aim;
     [SerializeField] private bool isAimingPrecisly;
     [SerializeField] private float offsetChangeRate = 6;
     private float offsetY;

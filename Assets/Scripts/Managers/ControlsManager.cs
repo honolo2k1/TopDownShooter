@@ -30,6 +30,7 @@ public class ControlsManager : MonoBehaviour
         controls.Car.Disable();
         controls.Character.Enable();
         player.SetControlsEnableTo(true);
+        player.aim.aim.GetComponent<SpriteRenderer>().enabled = true;
 
         UI.Instance.InGameUI.SwitchToCharcaterUI();
     }
@@ -43,6 +44,8 @@ public class ControlsManager : MonoBehaviour
         controls.Car.Disable();
         controls.Character.Disable();
         player.SetControlsEnableTo(false);
+
+        player.aim.aim.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     public void SwitchToCarControls()
@@ -54,5 +57,7 @@ public class ControlsManager : MonoBehaviour
         player.SetControlsEnableTo(false);
 
         UI.Instance.InGameUI.SwitchToCarUI();
+
+        player.aim.aim.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

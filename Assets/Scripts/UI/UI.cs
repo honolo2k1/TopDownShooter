@@ -95,6 +95,7 @@ public class UI : MonoBehaviour
     }
     public void ShowGameOverUI(string message = "GAME OVER!")
     {
+        Cursor.visible = true;
         SwitchToUI(GameOverUI.gameObject);
         Time.timeScale = 0;
         GameOverUI.ShowGameOverMessage(message);
