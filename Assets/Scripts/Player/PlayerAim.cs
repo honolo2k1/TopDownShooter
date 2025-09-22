@@ -206,7 +206,6 @@ public class PlayerAim : MonoBehaviour
     {
         Transform target = null;
 
-        Debug.LogError(GetMouseHitInfo().transform.gameObject.name);
         if (GetMouseHitInfo().transform.gameObject.GetComponentInParent<Enemy>() != null)
         {
             target = GetMouseHitInfo().transform;

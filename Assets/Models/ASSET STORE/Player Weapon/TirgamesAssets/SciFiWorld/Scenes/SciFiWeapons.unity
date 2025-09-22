@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -38,13 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
-  m_GIWorkflowMode: 1
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -180,7 +176,7 @@ PrefabInstance:
       value: SciFiGrenade01_1
       objectReference: {fileID: 0}
     - target: {fileID: 8503304857781626450, guid: b11e3e4dfe873f649b20f69ae9508b4f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: dd4d19c4bb8a75845ab3a11b63754492, type: 2}
     m_RemovedComponents: []
@@ -586,7 +582,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6418558343130031018, guid: db037f0b2a6c02e43a20c07ffde2ca54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f247debdc69083f4fbe8a59c53d0ef7a, type: 2}
     m_RemovedComponents: []
@@ -878,9 +874,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215988985}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.75
   m_Range: 10
@@ -930,8 +925,12 @@ Light:
   m_BoundingSphereOverride: {x: 1.05e-43, y: 1.0596762e-38, z: 0, w: -3.0000045}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &215988988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,7 +1181,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 3264293304881747362, guid: a8e7f31637a4904499150dd7d4ec4246, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ac676dc0131746a4688b616a1f7d0c05, type: 2}
     - target: {fileID: 3913035471470867575, guid: a8e7f31637a4904499150dd7d4ec4246, type: 3}
@@ -1284,9 +1283,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 279045706}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.75
   m_Range: 10
@@ -1336,8 +1334,12 @@ Light:
   m_BoundingSphereOverride: {x: 1.05e-43, y: 4.0058797e-11, z: 4.7571863e+30, w: 0.000042243297}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &279045709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,7 +1552,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443259069981818318, guid: f64358b2b8ee9f246865c56727b55b43, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 2d98d7d57370ef34caee3c5a635a64f7, type: 2}
     m_RemovedComponents: []
@@ -1572,7 +1574,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 321941558144405050, guid: de6e9ed8ea7a0a744ac2417072589383, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1f719e616bfdb5d4895ed4d3d9fe6e0b, type: 2}
     - target: {fileID: 1458296533890757973, guid: de6e9ed8ea7a0a744ac2417072589383, type: 3}
@@ -1822,7 +1824,7 @@ PrefabInstance:
       value: SciFiShotGun02_1
       objectReference: {fileID: 0}
     - target: {fileID: 6041270246260697866, guid: af9b6be16c703d84589847a37d7476af, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 03869d98bf141164ca538f026d91e8fb, type: 2}
     m_RemovedComponents: []
@@ -1910,7 +1912,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 4697793508440790367, guid: 794af8ab6b37dc7429d4557344377f05, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9650526d680aa7941884deca801a7e6d, type: 2}
     - target: {fileID: 5871223398870298160, guid: 794af8ab6b37dc7429d4557344377f05, type: 3}
@@ -2028,7 +2030,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4093416625739011132, guid: 3527c78f151fc6240b465cbf206eab95, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a39926aafdceed243966e2de1d820f0d, type: 2}
     m_RemovedComponents: []
@@ -2164,7 +2166,7 @@ PrefabInstance:
       value: SciFiAmmoBox01
       objectReference: {fileID: 0}
     - target: {fileID: 1628817000071197055, guid: 18b5e2cc154921e43b5966deefadc3ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1fa4e6a69bd7d0c4b9d1607a3d07a045, type: 2}
     m_RemovedComponents: []
@@ -2234,7 +2236,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4093416625739011132, guid: 3527c78f151fc6240b465cbf206eab95, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: cf53e8e0042bd6b4380274c04350bbe5, type: 2}
     m_RemovedComponents: []
@@ -2322,7 +2324,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 1510910208}
     m_Modifications:
     - target: {fileID: 2625661084191204475, guid: 332462daa75305e4199a4b6199b403b9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a646229c37eafd34abcd943e9a76f8ab, type: 2}
     - target: {fileID: 3763623923490971412, guid: 332462daa75305e4199a4b6199b403b9, type: 3}
@@ -2773,7 +2775,7 @@ PrefabInstance:
       value: SciFiPistol02_1
       objectReference: {fileID: 0}
     - target: {fileID: 3784708750390955105, guid: 6818623c6ea9fd842ab08ca3c59fa195, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 35fb0123b75e2c247bbf2a5604f7fba2, type: 2}
     m_RemovedComponents: []
@@ -2909,7 +2911,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6418558343130031018, guid: db037f0b2a6c02e43a20c07ffde2ca54, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 0e82c0eb40f8213458b99372aaf68657, type: 2}
     m_RemovedComponents: []
@@ -2979,7 +2981,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443259069981818318, guid: f64358b2b8ee9f246865c56727b55b43, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e3b4c1719083d584292da034d4c89fe3, type: 2}
     m_RemovedComponents: []
@@ -3167,9 +3169,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824842760}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.75
   m_Range: 10
@@ -3219,8 +3220,12 @@ Light:
   m_BoundingSphereOverride: {x: 1.05e-43, y: 4.2105167e-11, z: 4.7537046e+30, w: 0.000042243297}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &824842763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3301,7 +3306,7 @@ PrefabInstance:
       value: SciFiAmmoBox01
       objectReference: {fileID: 0}
     - target: {fileID: 1628817000071197055, guid: 18b5e2cc154921e43b5966deefadc3ce, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e76abf1c8f1264344a1c901b843fc136, type: 2}
     m_RemovedComponents: []
@@ -3516,7 +3521,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599034207361437059, guid: f8ff7e9122ed1fa4e8200eaa7a8db70e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 8d5bdd122b4f1494e8684b712ef25d3e, type: 2}
     m_RemovedComponents: []
@@ -3586,7 +3591,7 @@ PrefabInstance:
       value: SciFiGrenade01_1
       objectReference: {fileID: 0}
     - target: {fileID: 8503304857781626450, guid: b11e3e4dfe873f649b20f69ae9508b4f, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 90f34e3f7c90ce249a6c5afde0e33d9c, type: 2}
     m_RemovedComponents: []
@@ -3656,7 +3661,7 @@ PrefabInstance:
       value: SciFiRocketLauncher01_1
       objectReference: {fileID: 0}
     - target: {fileID: 1555554434408682448, guid: 2f14b752d79597f4b926bdd464472944, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58908950a3db9234abb7c1ec0c86c238, type: 2}
     m_RemovedComponents: []
@@ -3823,7 +3828,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 3055815686150316785, guid: 1820aeab541daf547b74e3303fe49f88, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: fd5c7105886e537439a40b2b9e5767c8, type: 2}
     - target: {fileID: 3560249837278577444, guid: 1820aeab541daf547b74e3303fe49f88, type: 3}
@@ -3991,7 +3996,7 @@ PrefabInstance:
       value: SciFiPistol02_1
       objectReference: {fileID: 0}
     - target: {fileID: 3784708750390955105, guid: 6818623c6ea9fd842ab08ca3c59fa195, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: b6c821c76295a6d46b4142d3ed3c7626, type: 2}
     m_RemovedComponents: []
@@ -4013,7 +4018,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 321941558144405050, guid: de6e9ed8ea7a0a744ac2417072589383, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f835edd2e03d64145b7db8cd2f1fd009, type: 2}
     - target: {fileID: 1458296533890757973, guid: de6e9ed8ea7a0a744ac2417072589383, type: 3}
@@ -4083,7 +4088,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 3273425394408052909, guid: 7ce10cefc6c95974f85d79af747f9a0d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a6f140ff82181f4439eea87bf8c97bba, type: 2}
     - target: {fileID: 3921922232464505208, guid: 7ce10cefc6c95974f85d79af747f9a0d, type: 3}
@@ -4451,6 +4456,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeTrigger: {fileID: 0}
+  volumeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  stopNaNPropagation: 1
+  finalBlitToCameraTarget: 0
+  antialiasingMode: 0
+  temporalAntialiasing:
+    jitterSpread: 0.75
+    sharpness: 0.25
+    stationaryBlending: 0.95
+    motionBlending: 0.85
+  subpixelMorphologicalAntialiasing:
+    quality: 2
+  fastApproximateAntialiasing:
+    fastMode: 0
+    keepAlpha: 0
+  fog:
+    enabled: 1
+    excludeSkybox: 1
+  debugLayer:
+    lightMeter:
+      width: 512
+      height: 256
+      showCurves: 1
+    histogram:
+      width: 512
+      height: 256
+      channel: 3
+    waveform:
+      exposure: 0.12
+      height: 256
+    vectorscope:
+      size: 256
+      exposure: 0.12
+    overlaySettings:
+      linearDepth: 0
+      motionColorIntensity: 4
+      motionGridSize: 64
+      colorBlindnessType: 0
+      colorBlindnessStrength: 1
+  m_Resources: {fileID: 0}
+  m_ShowToolkit: 0
+  m_ShowCustomSorter: 0
+  breakBeforeColorGrading: 0
+  m_BeforeTransparentBundles: []
+  m_BeforeStackBundles: []
+  m_AfterStackBundles: []
 --- !u!1 &1166181954
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,6 +4533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 0}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!4 &1166181956
 Transform:
   m_ObjectHideFlags: 0
@@ -4622,7 +4680,7 @@ PrefabInstance:
       value: SciFiRocketLauncher01_1
       objectReference: {fileID: 0}
     - target: {fileID: 1555554434408682448, guid: 2f14b752d79597f4b926bdd464472944, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ee33d01e3fa2f164b9474df6fde6a1e4, type: 2}
     m_RemovedComponents: []
@@ -4704,7 +4762,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9103647241872287409, guid: bd38e53a8785027468800a2cce634c85, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5d1f8ab91b80e0d4191e4ebee615a2eb, type: 2}
     m_RemovedComponents: []
@@ -4840,7 +4898,7 @@ PrefabInstance:
       value: MWall350x350-1 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1465746482726903206, guid: 2d254ee21a63d014aa43312d939fbafb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 29a6b7ada2ac93645aa995afa520906d, type: 2}
     m_RemovedComponents: []
@@ -4922,7 +4980,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9103647241872287409, guid: bd38e53a8785027468800a2cce634c85, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 3483c95c63b15e1439182ef3766a1b9f, type: 2}
     m_RemovedComponents: []
@@ -4944,7 +5002,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 4697793508440790367, guid: 794af8ab6b37dc7429d4557344377f05, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 09cbb1e8c7038074dab5728f82c6f12d, type: 2}
     - target: {fileID: 5871223398870298160, guid: 794af8ab6b37dc7429d4557344377f05, type: 3}
@@ -5062,7 +5120,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6599034207361437059, guid: f8ff7e9122ed1fa4e8200eaa7a8db70e, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: aaa1bbcd7e355fc49aa9db45d795319c, type: 2}
     m_RemovedComponents: []
@@ -5384,7 +5442,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 493189441088805139, guid: 1df8118404a186c4cae3922da0346fc7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1f719e616bfdb5d4895ed4d3d9fe6e0b, type: 2}
     - target: {fileID: 1626650434582979196, guid: 1df8118404a186c4cae3922da0346fc7, type: 3}
@@ -5502,7 +5560,7 @@ PrefabInstance:
       value: SciFiShotGun02_1
       objectReference: {fileID: 0}
     - target: {fileID: 6041270246260697866, guid: af9b6be16c703d84589847a37d7476af, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ad0e689716cba3a4bade54e71bfb1024, type: 2}
     m_RemovedComponents: []
@@ -5722,7 +5780,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 3273425394408052909, guid: 7ce10cefc6c95974f85d79af747f9a0d, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 117408ac11239ed4eb395f329f86f17d, type: 2}
     - target: {fileID: 3921922232464505208, guid: 7ce10cefc6c95974f85d79af747f9a0d, type: 3}
@@ -6126,7 +6184,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 3264293304881747362, guid: a8e7f31637a4904499150dd7d4ec4246, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: dcffa1fd40fac354eab686eb1ae57d1f, type: 2}
     - target: {fileID: 3913035471470867575, guid: a8e7f31637a4904499150dd7d4ec4246, type: 3}
@@ -6196,7 +6254,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 312177988081679156, guid: 869e80bc795f8924fa0debc35c0d6ffc, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 88905ad3ef6a28c418c692158e8ab27b, type: 2}
     - target: {fileID: 1449658687505432667, guid: 869e80bc795f8924fa0debc35c0d6ffc, type: 3}
@@ -6266,7 +6324,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 1510910208}
     m_Modifications:
     - target: {fileID: 2625661084191204475, guid: 332462daa75305e4199a4b6199b403b9, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 29a6b7ada2ac93645aa995afa520906d, type: 2}
     - target: {fileID: 3763623923490971412, guid: 332462daa75305e4199a4b6199b403b9, type: 3}
@@ -6450,7 +6508,7 @@ PrefabInstance:
       value: MWall350x350-1 (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1465746482726903206, guid: 2d254ee21a63d014aa43312d939fbafb, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: a646229c37eafd34abcd943e9a76f8ab, type: 2}
     m_RemovedComponents: []
@@ -6472,7 +6530,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 8058710447614853480, guid: 16d0d10b388117341aa70cf76a6e4a77, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: ee33d01e3fa2f164b9474df6fde6a1e4, type: 2}
     - target: {fileID: 8419116684924657853, guid: 16d0d10b388117341aa70cf76a6e4a77, type: 3}
@@ -6542,7 +6600,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 3055815686150316785, guid: 1820aeab541daf547b74e3303fe49f88, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: d694cfc07615cb94aae7bcea0c881e0b, type: 2}
     - target: {fileID: 3560249837278577444, guid: 1820aeab541daf547b74e3303fe49f88, type: 3}
@@ -6660,7 +6718,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213694580376245222, guid: 6c37c66b52e92324c9ed22176ccac103, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: eacc3d7c037d3384e91f1560d03ae90b, type: 2}
     m_RemovedComponents: []
@@ -6748,7 +6806,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 2010987386}
     m_Modifications:
     - target: {fileID: 493189441088805139, guid: 1df8118404a186c4cae3922da0346fc7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: f835edd2e03d64145b7db8cd2f1fd009, type: 2}
     - target: {fileID: 1626650434582979196, guid: 1df8118404a186c4cae3922da0346fc7, type: 3}
@@ -6818,7 +6876,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 312177988081679156, guid: 869e80bc795f8924fa0debc35c0d6ffc, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e1204fd7ed240c242bfcff56ff92ccd9, type: 2}
     - target: {fileID: 1449658687505432667, guid: 869e80bc795f8924fa0debc35c0d6ffc, type: 3}
@@ -7492,7 +7550,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4213694580376245222, guid: 6c37c66b52e92324c9ed22176ccac103, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6220271723c51e140a71a103844f1dc7, type: 2}
     m_RemovedComponents: []
@@ -7646,7 +7704,7 @@ PrefabInstance:
     m_TransformParent: {fileID: 973200085}
     m_Modifications:
     - target: {fileID: 8058710447614853480, guid: 16d0d10b388117341aa70cf76a6e4a77, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 58908950a3db9234abb7c1ec0c86c238, type: 2}
     - target: {fileID: 8419116684924657853, guid: 16d0d10b388117341aa70cf76a6e4a77, type: 3}
@@ -8128,9 +8186,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2129389623}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 0
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 0.75
   m_Range: 10
@@ -8180,8 +8237,12 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 46, z: 0, w: 52}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
+  m_ForceVisible: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_LightUnit: 1
+  m_LuxAtDistance: 1
+  m_EnableSpotReflector: 1
 --- !u!114 &2129389626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8402,7 +8463,7 @@ PrefabInstance:
       value: SciFiPistol02_1
       objectReference: {fileID: 0}
     - target: {fileID: 3784708750390955105, guid: 6818623c6ea9fd842ab08ca3c59fa195, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 6227ec4edadaabd48a843b2e46f3a5c8, type: 2}
     m_RemovedComponents: []
@@ -8476,7 +8537,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443259069981818318, guid: f64358b2b8ee9f246865c56727b55b43, type: 3}
-      propertyPath: m_Materials.Array.data[0]
+      propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 9f32abcd20fdab3469ff3b65c98c1a2d, type: 2}
     m_RemovedComponents: []
