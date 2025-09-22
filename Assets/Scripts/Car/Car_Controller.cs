@@ -109,7 +109,7 @@ public class Car_Controller : MonoBehaviour
             return;
 
 
-        Speed = Rb.velocity.magnitude;
+        Speed = Rb.linearVelocity.magnitude;
         ui.InGameUI.UpdateSpeedText(Mathf.RoundToInt(Speed * 10) + "km/h");
 
         driftTimer -= Time.deltaTime;
@@ -163,8 +163,8 @@ public class Car_Controller : MonoBehaviour
 
     private void ApplySpeedLimit()
     {
-        if (Rb.velocity.magnitude > maxSpeed)
-            Rb.velocity = Rb.velocity.normalized * maxSpeed;
+        if (Rb.linearVelocity.magnitude > maxSpeed)
+            Rb.linearVelocity = Rb.linearVelocity.normalized * maxSpeed;
     }
 
     private void ApplySteering()
@@ -282,7 +282,7 @@ public class Car_Controller : MonoBehaviour
             wheel.Trail.emitting = false;
         }
 
-        Rb.drag = 1;
+        Rb.linearDamping = 1;
 
         motorForce = 0;
         isDrifting = true;

@@ -24,11 +24,11 @@ public class Enemy_Axe : MonoBehaviour
             dicrection = player.position + Vector3.up - transform.position;
         }
 
-        transform.forward = rb.velocity;
+        transform.forward = rb.linearVelocity;
     }
     private void FixedUpdate()
     {
-        rb.velocity = dicrection.normalized * flySpeed;
+        rb.linearVelocity = dicrection.normalized * flySpeed;
     }
     public void AxeSetup(float flySpeed, Transform player, float timer, int damage)
     {

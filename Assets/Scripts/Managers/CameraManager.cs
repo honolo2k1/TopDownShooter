@@ -1,5 +1,4 @@
-using Cinemachine;
-using Unity.Burst.Intrinsics;
+using Unity.Cinemachine;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour

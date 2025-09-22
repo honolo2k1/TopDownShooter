@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 7
+  version: 10
 --- !u!114 &-305684151758668420
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -34,8 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_HAIR_Wavy_Brown_02
-  m_Shader: {fileID: -6465566751694194690, guid: 55201f2180e6d7f44a2361fe83ae6720,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 55201f2180e6d7f44a2361fe83ae6720, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -43,11 +42,11 @@ Material:
   - _BUILTIN_ALPHATEST_ON
   - _BUILTIN_AlphaClip
   - _BUILTIN_SURFACE_TYPE_TRANSPARENT
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
   - _DOUBLESIDED_ON
   - _ENABLE_FOG_ON_TRANSPARENT
-  - _SURFACE_TYPE_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -242,6 +241,7 @@ Material:
     - _Tip_Color: {r: 0.4811321, g: 0.29015443, b: 0.25645247, a: 0}
     - _Wind_Direction: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &5457887608042033317
 MonoBehaviour:
   m_ObjectHideFlags: 11
