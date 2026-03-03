@@ -27,7 +27,7 @@ public class Mission_LastDefence : Mission
     }
     public override void StartMission()
     {
-        defencePoint = FindObjectOfType<MissionEnd_Trigger>().transform.position;
+        defencePoint = Object.FindFirstObjectByType<MissionEnd_Trigger>().transform.position;
         RespawnPoints = new List<Transform>(ClosetPoints(AmountOfRespawnPoints));
 
         UI.Instance.InGameUI.UpdateMissionUI("Get to the evacuation point.");
@@ -88,9 +88,11 @@ public class Mission_LastDefence : Mission
     }
     private List<Transform> ClosetPoints(int amount)
     {
-        List<Transform> closetPoints = new List<Transform>();
+        List<Transform> closetPoints = new();
 
-        List<MissionObject_EnemyRespawnPoint> allPoints = new List<MissionObject_EnemyRespawnPoint>(FindObjectsOfType<MissionObject_EnemyRespawnPoint>());
+        List<MissionObject_EnemyRespawnPoint> allPoints = new(
+             Object.FindObjectsByType<MissionObject_EnemyRespawnPoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None)
+         );
 
         while (closetPoints.Count < amount && allPoints.Count > 0)
         {

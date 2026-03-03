@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour
     {
         player = GetComponent<Player>();
 
-        walkSFX = player.sound.WalkSFX;
-        runSFX = player.sound.RunSFX;
+        walkSFX = player.Sound.WalkSFX;
+        runSFX = player.Sound.RunSFX;
         Invoke(nameof(AllowfootstepsSFX), 1f);
 
         characterController = GetComponent<CharacterController>();
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (player.health.IsDead)
+        if (player.Health.IsDead)
         {
             return;
         }
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void AssignInputEvents()
     {
-        controls = player.controls;
+        controls = player.Controls;
 
         controls.Character.Movement.performed += context => moveInput = context.ReadValue<Vector2>();
         controls.Character.Movement.canceled += context =>
@@ -91,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyRotaion()
     {
-        Vector3 lookingDirection = player.aim.GetMouseHitInfo().point - transform.position;
+        Vector3 lookingDirection = player.Aim.GetMouseHitInfo().point - transform.position;
         lookingDirection.y = 0f;
         lookingDirection.Normalize();
 

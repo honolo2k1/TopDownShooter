@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 public class UI : MonoBehaviour
 {
@@ -119,7 +120,7 @@ public class UI : MonoBehaviour
 
     private void AssignInputsUI()
     {
-        PlayerControls controls = GameManager.Instance.Player.controls;
+        PlayerControls controls = GameManager.Instance.Player.Controls;
 
         controls.UI.UIPause.performed += conext => PauseSwitch();
     }
@@ -179,7 +180,7 @@ public class UI : MonoBehaviour
     [ContextMenu("Assign Audio To Buttons")]
     public void AssignAudioListenesrsToButtons()
     {
-        UI_Button[] buttons = FindObjectsOfType<UI_Button>(true);
+        UI_Button[] buttons = Object.FindObjectsByType<UI_Button>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         foreach (var button in buttons)
         {

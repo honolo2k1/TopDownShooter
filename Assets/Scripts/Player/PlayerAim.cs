@@ -46,10 +46,10 @@ public class PlayerAim : MonoBehaviour
     }
     private void Update()
     {
-        if (player.health.IsDead)
+        if (player.Health.IsDead)
             return;
 
-        if (player.controlsEnable == false)
+        if (player.ControlsEnable == false)
             return;
 
         UpdateAimVisuals();
@@ -84,7 +84,7 @@ public class PlayerAim : MonoBehaviour
 
     private void AssignInputEvents()
     {
-        controls = player.controls;
+        controls = player.Controls;
 
         controls.Character.PreciseAim.performed += context => EnablePreciseAim(true);
         controls.Character.PreciseAim.canceled += context => EnablePreciseAim(false);
@@ -97,23 +97,23 @@ public class PlayerAim : MonoBehaviour
     private void UpdateAimVisuals()
     {
         aim.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
-        aimLaser.enabled = player.weapon.WeaponReady();
+        aimLaser.enabled = player.Weapon.WeaponReady();
 
         if (aimLaser.enabled == false)
             return;
 
 
-        WeaponModel weaponModel = player.weaponVisuals.CurrentWeaponModel();
+        WeaponModel weaponModel = player.WeaponVisuals.CurrentWeaponModel();
 
         weaponModel.transform.LookAt(aim);
         weaponModel.gunPoint.LookAt(aim);
 
 
-        Transform gunPoint = player.weapon.GunPoint();
-        Vector3 laserDirection = player.weapon.BulletDirection();
+        Transform gunPoint = player.Weapon.GunPoint();
+        Vector3 laserDirection = player.Weapon.BulletDirection();
 
         float laserTipLenght = .5f;
-        float gunDistance = player.weapon.CurrentWeapon().GunDistance;
+        float gunDistance = player.Weapon.CurrentWeapon().GunDistance;
 
         Vector3 endPoint = gunPoint.position + laserDirection * gunDistance;
 
@@ -173,7 +173,7 @@ public class PlayerAim : MonoBehaviour
 
     private Vector3 DesieredCameraPosition()
     {
-        float actualMaxCameraDistance = player.movement.moveInput.y < -.5f ? minCameraDistance : maxCameraDistance;
+        float actualMaxCameraDistance = player.Movement.moveInput.y < -.5f ? minCameraDistance : maxCameraDistance;
 
         Vector3 desiredCameraPosition = GetMouseHitInfo().point;
         Vector3 aimDirection = (desiredCameraPosition - transform.position).normalized;

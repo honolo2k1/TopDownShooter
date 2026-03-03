@@ -58,7 +58,7 @@ public class PlayerWeaponController : MonoBehaviour
     {
         if (WeaponReady() == false) return;
         if (currentWeapon.CanShoot() == false) return;
-        player.weaponVisuals.PlayFireAnimation();
+        player.WeaponVisuals.PlayFireAnimation();
         if (currentWeapon.ShootType == ShootType.Single) isShooting = false;
 
         if (currentWeapon.BurstActived() == true)
@@ -77,7 +77,7 @@ public class PlayerWeaponController : MonoBehaviour
         currentWeapon.BulletsInMagazine--;
         UpdateWeaponUI();
 
-        player.weaponVisuals.CurrentWeaponModel().FireSFX.Play();
+        player.WeaponVisuals.CurrentWeaponModel().FireSFX.Play();
 
         GameObject newBullet = ObjectPool.Instance.GetObject(bullet, GunPoint());
 
@@ -97,9 +97,9 @@ public class PlayerWeaponController : MonoBehaviour
     private void Reload()
     {
         SetWeaponReady(false);
-        player.weaponVisuals.PlayReloadAnimation();
+        player.WeaponVisuals.PlayReloadAnimation();
 
-        player.weaponVisuals.CurrentWeaponModel().ReloadSfx.Play();
+        player.WeaponVisuals.CurrentWeaponModel().ReloadSfx.Play();
     }
 
     #region Slots Manager 
@@ -125,7 +125,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         SetWeaponReady(false);
         currentWeapon = weaponSlots[index];
-        player.weaponVisuals.PlayWeaponEquipAnimation();
+        player.WeaponVisuals.PlayWeaponEquipAnimation();
 
         CameraManager.Instance.ChangeCameraDistance(currentWeapon.CameraDistance);
 
@@ -144,7 +144,7 @@ public class PlayerWeaponController : MonoBehaviour
         {
             int weaponIndex = weaponSlots.IndexOf(currentWeapon);
 
-            player.weaponVisuals.SwitchOffWeaponModels();
+            player.WeaponVisuals.SwitchOffWeaponModels();
 
             weaponSlots[weaponIndex] = newWeapon;
             CreateWeaponOnTheGround();
@@ -154,7 +154,7 @@ public class PlayerWeaponController : MonoBehaviour
         }
 
         weaponSlots.Add(newWeapon);
-        player.weaponVisuals.SwitchOnBackupWeaponModel();
+        player.WeaponVisuals.SwitchOnBackupWeaponModel();
 
         UpdateWeaponUI();
     }
@@ -184,7 +184,7 @@ public class PlayerWeaponController : MonoBehaviour
         weaponReady = ready;
         
         if (ready)
-            player.sound.WeaponReady.Play();
+            player.Sound.WeaponReady.Play();
     } 
     public bool WeaponReady() => weaponReady;
 
@@ -197,7 +197,7 @@ public class PlayerWeaponController : MonoBehaviour
 
     public Vector3 BulletDirection()
     {
-        Transform aim = player.aim.Aim();
+        Transform aim = player.Aim.Aim();
 
         //if (player.aim.Target() != null)
         //{
@@ -227,7 +227,7 @@ public class PlayerWeaponController : MonoBehaviour
         return null;
     }
     public Weapon CurrentWeapon() => currentWeapon;
-    public Transform GunPoint() => player.weaponVisuals.CurrentWeaponModel().gunPoint;
+    public Transform GunPoint() => player.WeaponVisuals.CurrentWeaponModel().gunPoint;
 
     private void TriggerEnemyDodge()
     {
@@ -248,7 +248,7 @@ public class PlayerWeaponController : MonoBehaviour
     #region Input Events
     private void AssignInputEvents()
     {
-        PlayerControls controls = player.controls;
+        PlayerControls controls = player.Controls;
         controls.Character.Fire.performed += context => isShooting = true;
         controls.Character.Fire.canceled += context => isShooting = false;
 

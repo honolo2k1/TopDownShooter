@@ -29,7 +29,7 @@ public class Pickup_Ammo : Interacable
             AddBulletsToWeapon(weapon, GetBulletAmount(ammo));
         }
 
-        UI.Instance.InGameUI.UpdateWeaponUI(GameManager.Instance.Player.weapon.weaponSlots, GameManager.Instance.Player.weapon.currentWeapon);
+        UI.Instance.InGameUI.UpdateWeaponUI(GameManager.Instance.Player.Weapon.weaponSlots, GameManager.Instance.Player.Weapon.currentWeapon);
         ObjectPool.Instance.ReturnObject(gameObject);
     }
 

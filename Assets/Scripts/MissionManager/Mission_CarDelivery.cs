@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,9 +5,10 @@ using UnityEngine;
 public class Mission_CarDelivery : Mission
 {
     private bool carWasDelivered;
+
     public override void StartMission()
     {
-        FindObjectOfType<MissionObject_CarDeliveryZone>(true).gameObject.SetActive(true);
+        Object.FindFirstObjectByType<MissionObject_CarDeliveryZone>(FindObjectsInactive.Include).gameObject.SetActive(true);
 
         string missionText = "Find a functional vehicle.";
         string missionDetails = "Deliver it to the evacuation point.";
@@ -19,7 +18,7 @@ public class Mission_CarDelivery : Mission
         carWasDelivered = false;
         MissionObject_CarDeliver.OnCarDelivery += CarDeliveryCompleted;
 
-        Car_Controller[] cars = FindObjectsOfType<Car_Controller>();
+        Car_Controller[] cars = Object.FindObjectsByType<Car_Controller>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
         foreach (Car_Controller car in cars)
         {

@@ -19,8 +19,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        Player = FindObjectOfType<Player>();
+        Player = Object.FindFirstObjectByType<Player>();
     }
 
     private void Update()
@@ -40,7 +39,7 @@ public class GameManager : MonoBehaviour
         UI.Instance.ShowVictoryScreenUI();
 
         ControlsManager.Instance.controls.Character.Disable();
-        Player.health.CurrentHealth += 99999; 
+        Player.Health.CurrentHealth += 99999; 
     }
     public void GameOver()
     {
@@ -51,6 +50,6 @@ public class GameManager : MonoBehaviour
     public void SetDefaultWeaponsForPlayer()
     {
         List<Weapon_Data> newList = UI.Instance.WeaponSelection.SelectedWeaponData();
-        Player.weapon.SetDefaultWeapon(newList);
+        Player.Weapon.SetDefaultWeapon(newList);
     }
 }

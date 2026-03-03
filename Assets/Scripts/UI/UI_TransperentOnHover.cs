@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class UI_TransperentOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     private Dictionary<Image, Color> originalImageColors = new Dictionary<Image, Color>();
-    private Dictionary<TextMeshProUGUI, Color> originalTextColors = new Dictionary<TextMeshProUGUI, Color>();
+    private Dictionary<TextMeshProUGUI, Color> originalTextColors = new();
 
     private bool hasUIWeaponSlots;
     private PlayerWeaponController playerWeaponController;
@@ -16,7 +16,7 @@ public class UI_TransperentOnHover : MonoBehaviour, IPointerEnterHandler, IPoint
         hasUIWeaponSlots = GetComponentInChildren<UI_WeaponSlot>();
         if (hasUIWeaponSlots)
         {
-            playerWeaponController = FindObjectOfType<PlayerWeaponController>();
+            playerWeaponController = Object.FindFirstObjectByType<PlayerWeaponController>();
         }
 
         foreach (var image in GetComponentsInChildren<Image>(true))

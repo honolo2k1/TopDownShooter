@@ -7,10 +7,8 @@ public class PlayerHealth : HealthController
 {
     private Player player;
 
-
     public GameObject FloatingTextPrefab;
 
-    public bool IsDead { get; private set; }
     protected override void Awake()
     {
         base.Awake();
@@ -44,8 +42,8 @@ public class PlayerHealth : HealthController
         { return; }
 
         IsDead = true;
-        player.anim.enabled = false;
-        player.ragdoll.RagdollActive(false);
+        player.Anim.enabled = false;
+        player.Ragdoll.RagdollActive(false);
 
         GameManager.Instance.GameOver();
     }

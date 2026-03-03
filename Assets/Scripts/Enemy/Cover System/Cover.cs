@@ -7,24 +7,24 @@ public class Cover : MonoBehaviour
 
     [Header("Cover Points")]
     [SerializeField] private GameObject coverPointPrefab;
-    [SerializeField] private List<CoverPoint> coverPoints = new List<CoverPoint>();
+    [SerializeField] private List<CoverPoint> coverPoints = new();
     [SerializeField] private float xOffset = 1.25f;
     [SerializeField] private float yOffset = 0.2f;
     [SerializeField] private float zOffset = 1;
     private void Start()
     {
         GenerateCoverPoints();
-        playerTransform = FindObjectOfType<Player>().transform;
+        playerTransform = Object.FindFirstObjectByType<Player>().transform;
     }
 
     private void GenerateCoverPoints()
     {
         Vector3[] localCoverPoints =
         {
-            new Vector3 (0, yOffset, zOffset),
-            new Vector3 (0, yOffset, -zOffset),
-            new Vector3 (xOffset, yOffset, 0),
-            new Vector3 (-xOffset, yOffset, 0),
+            new(0, yOffset, zOffset),
+            new(0, yOffset, -zOffset),
+            new(xOffset, yOffset, 0),
+            new(-xOffset, yOffset, 0),
         };
 
         foreach (Vector3 localPoint in localCoverPoints)
@@ -38,7 +38,7 @@ public class Cover : MonoBehaviour
 
     public List<CoverPoint> GetValidCoverPoints(Transform enemy) 
     {
-        List<CoverPoint> validCoverPoints = new List<CoverPoint>();
+        List<CoverPoint> validCoverPoints = new();
         foreach (CoverPoint coverPoint in coverPoints)
         {
             if (IsValidCoverPoint(coverPoint, enemy))

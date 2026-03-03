@@ -14,11 +14,6 @@ public class MinimapSettings : MonoBehaviour
         set { _cameraHeight = value; }
         get { return _cameraHeight; }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -29,9 +24,9 @@ public class MinimapSettings : MonoBehaviour
     public void InitMiniMap(float cameraHeight)
     {
         _cameraHeight = cameraHeight;
-        _targetToFollow = GameObject.FindObjectOfType<Player>().transform;
-
+        _targetToFollow = Object.FindFirstObjectByType<Player>().transform;
     }
+
     private void FollowTarget()
     {
         Vector3 targetPosition = _targetToFollow.transform.position;

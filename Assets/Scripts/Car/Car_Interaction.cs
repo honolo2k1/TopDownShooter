@@ -61,7 +61,7 @@ public class Car_Interaction : Interacable
         player.transform.localScale = new Vector3(defaultPlayerScale, defaultPlayerScale, defaultPlayerScale);
 
         ControlsManager.Instance.SwitchToCharacterControls();
-        PlayerAim aim = GameManager.Instance.Player.aim;
+        PlayerAim aim = GameManager.Instance.Player.Aim;
 
         CameraManager.Instance.ChangeCameraTarget(aim.GetAimCameraTarget(), 8.5f);
     }

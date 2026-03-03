@@ -16,6 +16,6 @@ public class PlayerHitbox : HitBox
     {
         int newDamage = Mathf.RoundToInt(damage * damageMultiplier);
 
-        player.health.ReduceHealth(newDamage);
+        player.Health.ReduceHealth(newDamage);
     }
 }

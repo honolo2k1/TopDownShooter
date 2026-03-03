@@ -13,7 +13,7 @@ public class UI_Button : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private Vector3 targetScale;
 
     private Image buttonImage;
-    private TextMeshProUGUI buttonText;
+    protected TextMeshProUGUI buttonText;
 
     [Header("Audio")]
     [SerializeField] private AudioSource pointerEnterSFX;

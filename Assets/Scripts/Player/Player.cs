@@ -4,82 +4,78 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public Transform playerBody;
-    public PlayerControls controls { get; private set; }
-    public PlayerAim aim { get; private set; }
-    public PlayerMovement movement { get; private set; }
-    public PlayerWeaponController weapon { get; private set; }
-    public PlayerWeaponVisuals weaponVisuals { get; private set; }
-    public PlayerInteraction interaction { get; private set; }
-    public PlayerHealth health { get; private set; }
-    public Ragdoll ragdoll { get; private set; }
-    public Animator anim { get; private set; }
-    public PlayerSoundFX sound { get; private set; }
-    public bool controlsEnable { get; private set; }
+    public PlayerControls Controls { get; private set; }
+    public PlayerAim Aim { get; private set; }
+    public PlayerMovement Movement { get; private set; }
+    public PlayerWeaponController Weapon { get; private set; }
+    public PlayerWeaponVisuals WeaponVisuals { get; private set; }
+    public PlayerInteraction Interaction { get; private set; }
+    public PlayerHealth Health { get; private set; }
+    public Ragdoll Ragdoll { get; private set; }
+    public Animator Anim { get; private set; }
+    public PlayerSoundFX Sound { get; private set; }
+    public bool ControlsEnable { get; private set; }
 
     private void Awake()
     {
-        health = GetComponent<PlayerHealth>();
-        ragdoll = GetComponent<Ragdoll>();
-        anim = GetComponentInChildren<Animator>();
-        aim = GetComponent<PlayerAim>();
-        movement = GetComponent<PlayerMovement>();
-        weapon = GetComponent<PlayerWeaponController>();
-        weaponVisuals = GetComponent<PlayerWeaponVisuals>();
-        interaction = GetComponent<PlayerInteraction>();
-        controls = ControlsManager.Instance.controls;
-        sound = GetComponent<PlayerSoundFX>();
+        Health = GetComponent<PlayerHealth>();
+        Ragdoll = GetComponent<Ragdoll>();
+        Anim = GetComponentInChildren<Animator>();
+        Aim = GetComponent<PlayerAim>();
+        Movement = GetComponent<PlayerMovement>();
+        Weapon = GetComponent<PlayerWeaponController>();
+        WeaponVisuals = GetComponent<PlayerWeaponVisuals>();
+        Interaction = GetComponent<PlayerInteraction>();
+        Controls = ControlsManager.Instance.controls;
+        Sound = GetComponent<PlayerSoundFX>();
     }
     private void OnEnable()
     {
-        controls.Enable();
+        Controls.Enable();
 
-        controls.Character.UIMissionTooltipSwitch.performed += context => UI.Instance.InGameUI.SwitchMissionTooltip();
-        controls.Character.UIPause.performed += context => UI.Instance.PauseSwitch();
+        Controls.Character.UIMissionTooltipSwitch.performed += context => UI.Instance.InGameUI.SwitchMissionTooltip();
+        Controls.Character.UIPause.performed += context => UI.Instance.PauseSwitch();
 
     }
     private void OnDisable()
     {
-        controls.Disable();
+        Controls.Disable();
     }
 
     public void SetControlsEnableTo(bool enabled)
     {
-        controlsEnable = enabled;
-        ragdoll.CollidersActive(enabled);
-        aim.EnableAimLaser(enabled);
+        ControlsEnable = enabled;
+        Ragdoll.CollidersActive(enabled);
+        Aim.EnableAimLaser(enabled);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
-            health.CurrentHealth = 999999;
-            UI.Instance.InGameUI.UpdateHeathUI(health.CurrentHealth, health.MaxHealth);
+            Health.CurrentHealth = 999999;
+            UI.Instance.InGameUI.UpdateHeathUI(Health.CurrentHealth, Health.MaxHealth);
 
-
-            Car_HealthController car = FindObjectOfType<Car_HealthController>(true);
+            Car_HealthController car = Object.FindFirstObjectByType<Car_HealthController>(FindObjectsInactive.Include);
             if (car != null)
             {
                 car.CurrentHealth = 99999;
                 car.UpdateCarHealthUI();
             }
 
-            weapon.CurrentWeapon().TotalReverseAmmo += 999999;
-            weapon.CurrentWeapon().BulletsInMagazine = weapon.CurrentWeapon().TotalReverseAmmo;
-            UI.Instance.InGameUI.UpdateWeaponUI(weapon.weaponSlots, weapon.currentWeapon);
+            Weapon.CurrentWeapon().TotalReverseAmmo += 999999;
+            Weapon.CurrentWeapon().BulletsInMagazine = Weapon.CurrentWeapon().TotalReverseAmmo;
+            UI.Instance.InGameUI.UpdateWeaponUI(Weapon.weaponSlots, Weapon.currentWeapon);
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            // Tìm tất cả các đối tượng Enemy trên Scene
-            var enemies = FindObjectsOfType<Enemy>();
+            var enemies = Object.FindObjectsByType<Enemy>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
 
-            // Duyệt qua từng Enemy và gọi hàm GetHit
             foreach (var enemy in enemies)
             {
                 enemy.GetHit(100000);
             }
         }
-
     }
 }

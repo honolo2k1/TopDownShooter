@@ -44,7 +44,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
     public void PlayFireAnimation() => anim.SetTrigger("Fire");
     public void PlayReloadAnimation()
     {
-        float reloadSpeed = player.weapon.CurrentWeapon().ReloadSpeed;
+        float reloadSpeed = player.Weapon.CurrentWeapon().ReloadSpeed;
         anim.SetTrigger("Reload");
         anim.SetFloat("ReloadSpeed", reloadSpeed);
         ReduceRigWeigth();
@@ -54,7 +54,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
     {
         EquipType equipType = CurrentWeaponModel().EquipType;
 
-        float equipmentSpeed = player.weapon.CurrentWeapon().EquipmentSpeed;
+        float equipmentSpeed = player.Weapon.CurrentWeapon().EquipmentSpeed;
 
         leftHandIK.weight = 0.0f;
         ReduceRigWeigth();
@@ -70,7 +70,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
         SwitchOffWeaponModels();
         SwitchOffBackupWeaponModels();
 
-        if (player.weapon.HasOnlyOneWeapon() == false)
+        if (player.Weapon.HasOnlyOneWeapon() == false)
         {
             SwitchOnBackupWeaponModel();
         }
@@ -98,9 +98,9 @@ public class PlayerWeaponVisuals : MonoBehaviour
 
         foreach (BackupWeaponModel backupWeaponModel in backupWeaponModels)
         {
-            if (backupWeaponModel.WeaponType == player.weapon.CurrentWeapon().WeaponType) continue;
+            if (backupWeaponModel.WeaponType == player.Weapon.CurrentWeapon().WeaponType) continue;
 
-            if (player.weapon.WeaponInSlots(backupWeaponModel.WeaponType) != null)
+            if (player.Weapon.WeaponInSlots(backupWeaponModel.WeaponType) != null)
             {
                 if (backupWeaponModel.HangTypeIs(HangType.LowBackHang))
                 {
@@ -143,7 +143,7 @@ public class PlayerWeaponVisuals : MonoBehaviour
     {
         WeaponModel weaponModel = null;
 
-        WeaponType weaponType = player.weapon.CurrentWeapon().WeaponType;
+        WeaponType weaponType = player.Weapon.CurrentWeapon().WeaponType;
 
         for (int i = 0; i < weaponModels.Length; i++)
         {
