@@ -1,13 +1,11 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSingleton<GameManager>
 {
     [SerializeField] private Camera CameraForAim;
     [SerializeField] private Camera MainCamera;
-    public static GameManager Instance;
     public Player Player;
     public bool IsCursorOn;
 
@@ -16,10 +14,9 @@ public class GameManager : MonoBehaviour
     [Space]
     public bool QuickStart;
 
-    private void Awake()
+    protected override void Initiate()
     {
-        Instance = this;
-        Player = Object.FindFirstObjectByType<Player>();
+        Player = FindFirstObjectByType<Player>();
     }
 
     private void Update()
@@ -39,7 +36,7 @@ public class GameManager : MonoBehaviour
         UI.Instance.ShowVictoryScreenUI();
 
         ControlsManager.Instance.controls.Character.Disable();
-        Player.Health.CurrentHealth += 99999; 
+        Player.Health.CurrentHealth += 99999;
     }
     public void GameOver()
     {

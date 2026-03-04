@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
-public class UI : MonoBehaviour
+public class UI : MonoSingleton<UI>
 {
-    public static UI Instance;
     public UI_InGame InGameUI { get; private set; }
     public UI_WeaponSelection WeaponSelection { get; private set; }
     public UI_GameOver GameOverUI { get; private set; }
@@ -22,9 +21,8 @@ public class UI : MonoBehaviour
     [Header("Fade Image")]
     [SerializeField] private Image fadeImage;
 
-    private void Awake()
+    protected override void Initiate()
     {
-        Instance = this;
         InGameUI = GetComponentInChildren<UI_InGame>(true);
         WeaponSelection = GetComponentInChildren<UI_WeaponSelection>(true);
         GameOverUI = GetComponentInChildren<UI_GameOver>(true);
@@ -32,6 +30,7 @@ public class UI : MonoBehaviour
 
         Cursor.visible = true;
     }
+
     private void Start()
     {
         AssignInputsUI();
@@ -91,7 +90,7 @@ public class UI : MonoBehaviour
             SwitchToUI(PauseUI);
             ControlsManager.Instance.SwitchToUIControls();
             TimeManager.Instance.PauseTime();
-    
+
         }
     }
     public void ShowGameOverUI(string message = "GAME OVER!")

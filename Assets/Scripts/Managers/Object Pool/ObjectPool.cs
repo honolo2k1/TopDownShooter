@@ -1,85 +1,91 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : MonoSingleton<ObjectPool>
 {
-    public static ObjectPool Instance;
+    private Dictionary<GameObject, ObjectPool<GameObject>> poolDictionary = new Dictionary<GameObject, ObjectPool<GameObject>>();
 
-    [SerializeField] private int poolSize = 10;
+    [Header("Settings")]
+    [SerializeField] private bool collectionCheck = true;
+    [SerializeField] private int defaultCapacity = 10;
+    [SerializeField] private int maxPoolSize = 100;
 
-    private Dictionary<GameObject, Queue<GameObject>> poolDictionary = new Dictionary<GameObject, Queue<GameObject>>();
-
-    [Header("To Initialize")]
-    [SerializeField] private GameObject weaponPickup;
-    [SerializeField] private GameObject ammoPickup;
-    private void Awake()
+    public GameObject GetObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
+        if (!poolDictionary.ContainsKey(prefab))
+        {
+            poolDictionary[prefab] = CreateNewPool(prefab);
+        }
 
+        GameObject instance = poolDictionary[prefab].Get();
+        instance.transform.SetPositionAndRotation(position, rotation);
+
+        return instance;
     }
-    private void Start()
-    {
-        InitNewPool(weaponPickup);
-        InitNewPool(ammoPickup);
-    }
+
     public GameObject GetObject(GameObject prefab, Transform target)
     {
-        if (poolDictionary.ContainsKey(prefab) == false)
-        {
-            InitNewPool(prefab);
-        }
-        if (poolDictionary[prefab].Count == 0)
-        {
-            CreateNewObject(prefab);
-        }
-
-        GameObject objectToGet = poolDictionary[prefab].Dequeue();
-
-        objectToGet.transform.position = target.position;
-        objectToGet.transform.parent = null;
-
-        objectToGet.SetActive(true);
-
-        return objectToGet;
+        return GetObject(prefab, target.position, target.rotation);
     }
 
-    public void ReturnObject(GameObject objectToReturn, float delay = 0.001f) => StartCoroutine(DelayReturn(delay, objectToReturn));
+    public GameObject GetObject(GameObject prefab, Vector3 position)
+    {
+        return GetObject(prefab, position, Quaternion.identity);
+    }
 
-    private IEnumerator DelayReturn(float delay, GameObject objectToReturn)
+    public void ReturnObject(GameObject instance, float delay = 0)
+    {
+        if (delay > 0)
+        {
+            StartCoroutine(DelayReturn(instance, delay));
+        }
+        else
+        {
+            if (instance.TryGetComponent<PooledObject>(out var pooledObj))
+            {
+                pooledObj.Release();
+            }
+            else
+            {
+                Debug.LogWarning($"[ObjectPool] {instance.name} missing PooledObject component. Destroying.");
+                Destroy(instance);
+            }
+        }
+    }
+
+    private IEnumerator DelayReturn(GameObject instance, float delay)
     {
         yield return new WaitForSeconds(delay);
-
-        ReturnToPool(objectToReturn);
+        ReturnObject(instance);
     }
 
-    private void ReturnToPool(GameObject objectToReturn)
+    private ObjectPool<GameObject> CreateNewPool(GameObject prefab)
     {
-        GameObject originalPrefab = objectToReturn.GetComponent<PooledObject>().originalPrefab;
-        objectToReturn.SetActive(false);
-        objectToReturn.transform.parent = transform;
-
-        poolDictionary[originalPrefab].Enqueue(objectToReturn);
-    }
-
-    private void InitNewPool(GameObject prefab)
-    {
-        poolDictionary[prefab] = new Queue<GameObject>();
-
-        for (int i = 0; i < poolSize; i++)
-        {
-            CreateNewObject(prefab);
-        }
-    }
-
-    private void CreateNewObject(GameObject prefab)
-    {
-        GameObject newObject = Instantiate(prefab, transform);
-        newObject.AddComponent<PooledObject>().originalPrefab = prefab;
-        newObject.SetActive(false);
-        poolDictionary[prefab].Enqueue(newObject);
+        return new ObjectPool<GameObject>(
+            createFunc: () =>
+            {
+                GameObject newObj = Instantiate(prefab, transform);
+                PooledObject pooledScript = newObj.AddComponent<PooledObject>();
+                pooledScript.SetPool(poolDictionary[prefab]);
+                return newObj;
+            },
+            actionOnGet: (obj) =>
+            {
+                obj.SetActive(true);
+            },
+            actionOnRelease: (obj) =>
+            {
+                obj.SetActive(false);
+            },
+            actionOnDestroy: (obj) =>
+            {
+                Destroy(obj);
+            },
+            collectionCheck: collectionCheck,
+            defaultCapacity: defaultCapacity,
+            maxSize: maxPoolSize
+        );
     }
 }

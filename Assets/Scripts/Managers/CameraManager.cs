@@ -1,10 +1,8 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : MonoSingleton<CameraManager>
 {
-    public static CameraManager Instance;
-
     private CinemachineCamera virtualCamera;
     private CinemachinePositionComposer positionComposer;
 
@@ -13,16 +11,8 @@ public class CameraManager : MonoBehaviour
     [SerializeField] private float distanceChangeRate;
     [SerializeField] private float targetCameraDistance;
 
-    private void Awake()
+    override protected void Initiate()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
 
         virtualCamera = GetComponentInChildren<CinemachineCamera>();
         positionComposer = virtualCamera.GetComponent<CinemachinePositionComposer>();

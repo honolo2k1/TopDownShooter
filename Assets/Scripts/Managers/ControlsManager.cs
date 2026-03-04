@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlsManager : MonoBehaviour
+public class ControlsManager : MonoSingleton<ControlsManager>
 {
-    public static ControlsManager Instance;
-    public PlayerControls controls {  get; private set; }
+    public PlayerControls controls { get; private set; }
     private Player player;
 
-    private void Awake()
+    protected override void Initiate()
     {
-        Instance = this;
         controls = new PlayerControls();
     }
-
     private void Start()
     {
         player = GameManager.Instance.Player;

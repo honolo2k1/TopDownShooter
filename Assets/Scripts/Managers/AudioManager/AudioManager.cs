@@ -3,19 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoSingleton<AudioManager>
 {
-    public static AudioManager Instance;
-
     [SerializeField] private AudioSource[] bgm;
 
     [SerializeField] private bool playBgm;
     [SerializeField] private int bgmIndex;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Start()
     {

@@ -1,20 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class TimeManager : MonoBehaviour
+public class TimeManager : MonoSingleton<TimeManager>
 {
-    public static TimeManager Instance;
-
     [SerializeField] private float resumeRate = 1.5f;
     [SerializeField] private float pauseRate = 7;
 
     private float timeAdjustRate;
     private float targetTimeScale = 1f;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q)) 
