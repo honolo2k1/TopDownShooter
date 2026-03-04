@@ -440,7 +440,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf9fdcd4bb321408fcea829318a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPrefab: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
 --- !u!1 &41400029
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,7 +753,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf9fdcd4bb321408fcea829318a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPrefab: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
 --- !u!1 &71246425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,7 +3009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf9fdcd4bb321408fcea829318a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPrefab: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
 --- !u!1 &268096830
 GameObject:
   m_ObjectHideFlags: 0
@@ -12686,7 +12683,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.970976, z: -10.20113}
+  m_LocalPosition: {x: -0.06, y: 7.3723683, z: -10.482187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13704,7 +13701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf9fdcd4bb321408fcea829318a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPrefab: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
 --- !u!1 &1026614787
 GameObject:
   m_ObjectHideFlags: 0
@@ -16206,9 +16202,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd9aa0e6f752384e90593e282d376e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  poolSize: 20
-  weaponPickup: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
-  ammoPickup: {fileID: 6507382893145936057, guid: 9b5f88918c4cb274e8e6bd69881770a3, type: 3}
+  collectionCheck: 1
+  defaultCapacity: 10
+  maxPoolSize: 100
 --- !u!4 &1167967534
 Transform:
   m_ObjectHideFlags: 0
@@ -17855,7 +17851,7 @@ Transform:
   m_GameObject: {fileID: 1275633000}
   serializedVersion: 2
   m_LocalRotation: {x: 0.46174863, y: -0, z: -0, w: 0.8870109}
-  m_LocalPosition: {x: -0.06, y: 6.9709754, z: -10.201129}
+  m_LocalPosition: {x: -0.06, y: 7.3723683, z: -10.482187}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17888,7 +17884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CameraDistance: 8.509989
+  CameraDistance: 9
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -37096,7 +37092,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23bf9fdcd4bb321408fcea829318a952, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPrefab: {fileID: 7910647833024662754, guid: 54f1606bfc82fb548b524b6bb18511ce, type: 3}
 --- !u!1 &6556605509693730475
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class LevelGenarator : MonoBehaviour
+public class LevelGenarator : MonoSingleton<LevelGenarator>
 {
-    public static LevelGenarator Instance;
-
-    
     [SerializeField] private List<Enemy> enemyList;
     [SerializeField] private NavMeshSurface navMeshSurface;
     [Space]
@@ -24,10 +21,6 @@ public class LevelGenarator : MonoBehaviour
     private float cooldownTimer;
     public bool generationOver = true;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void Start()
     {
         enemyList = new List<Enemy>();

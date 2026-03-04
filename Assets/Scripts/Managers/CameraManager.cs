@@ -45,7 +45,7 @@ public class CameraManager : MonoSingleton<CameraManager>
         targetCameraDistance = distance;
     }
 
-    public void ChangeCameraTarget(Transform target, float cameraDistance = 40, float newLookAheadTime = 0)
+    public void ChangeCameraTarget(Transform target, float cameraDistance = 15, float newLookAheadTime = 0)
     {
         virtualCamera.Follow = target;
 

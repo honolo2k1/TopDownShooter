@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class MissionManager : MonoBehaviour
+public class MissionManager : MonoSingleton<MissionManager>
 {
-
-    public static MissionManager Instance;
-
     public Mission CurrentMission;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
     private void Update()
     {
         CurrentMission?.UpdateMission();
