@@ -1,5 +1,6 @@
 using UnityEngine;
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
 
 // Cartoon FX  - (c) 2015 Jean Moreno
 
@@ -15,25 +16,22 @@ public class CFX_AutoDestructShuriken : MonoBehaviour
 	
 	void OnEnable()
 	{
-		StartCoroutine("CheckIfAlive");
+		CheckIfAlive().Forget();
 	}
 	
-	IEnumerator CheckIfAlive ()
+	private async UniTaskVoid CheckIfAlive()
 	{
 		ParticleSystem ps = this.GetComponent<ParticleSystem>();
-		
-		while(true && ps != null)
+		var ct = this.GetCancellationTokenOnDestroy();
+
+		while (ps != null)
 		{
-			yield return new WaitForSeconds(0.5f);
-			if(!ps.IsAlive(true))
+			await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: ct);
+			if (!ps.IsAlive(true))
 			{
-				if(OnlyDeactivate)
+				if (OnlyDeactivate)
 				{
-					#if UNITY_3_5
-						this.gameObject.SetActiveRecursively(false);
-					#else
-						this.gameObject.SetActive(false);
-					#endif
+					this.gameObject.SetActive(false);
 				}
 				else
 					GameObject.Destroy(this.gameObject);

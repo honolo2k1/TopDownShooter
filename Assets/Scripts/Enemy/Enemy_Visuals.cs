@@ -34,7 +34,18 @@ public class Enemy_Visuals : MonoBehaviour
 
     private void Update()
     {
-        // Check if IK constraints are not null before adjusting weights
+        // Skip IK update if both weights are already at target
+        bool leftAtTarget = leftHandIKConstraint == null || Mathf.Abs(leftHandIKConstraint.weight - leftHandTargetWeight) <= 0.05f;
+        bool weaponAtTarget = weaponAimConstraint == null || Mathf.Abs(weaponAimConstraint.weight - weaponAimTargetWeight) <= 0.05f;
+
+        if (leftAtTarget && weaponAtTarget)
+        {
+            // Snap to exact target and skip
+            if (leftHandIKConstraint != null) leftHandIKConstraint.weight = leftHandTargetWeight;
+            if (weaponAimConstraint != null) weaponAimConstraint.weight = weaponAimTargetWeight;
+            return;
+        }
+
         if (leftHandIKConstraint != null)
         {
             leftHandIKConstraint.weight = AdjustIKWeight(leftHandIKConstraint.weight, leftHandTargetWeight);

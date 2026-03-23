@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 using static Enums;
 
 public class Enemy_Melee : Enemy
@@ -176,14 +177,14 @@ public class Enemy_Melee : Enemy
             anim.SetTrigger("Dodge");
 
             ragdoll.CollidersActive(false);
-            StartCoroutine(EnableCollidersAfterDelay(0.5f)); // Start the coroutine with a 0.5s delay
+            EnableCollidersAfterDelay(0.5f).Forget(); // Start the task with a 0.5s delay
         }
     }
 
-    // Coroutine to enable colliders after a delay
-    private IEnumerator EnableCollidersAfterDelay(float delay)
+    // Task to enable colliders after a delay
+    private async UniTaskVoid EnableCollidersAfterDelay(float delay)
     {
-        yield return new WaitForSeconds(delay); // Wait for 0.5 seconds
+        await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: this.GetCancellationTokenOnDestroy()); // Wait for 0.5 seconds
         ragdoll.CollidersActive(true); // Enable the colliders
     }
 

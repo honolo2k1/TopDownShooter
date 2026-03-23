@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class ZoneLimitation : MonoBehaviour
 {
@@ -31,14 +33,14 @@ public class ZoneLimitation : MonoBehaviour
         }
         zoneCollider.isTrigger = !active;
     }
-    IEnumerator WallActiveCoroutine()
+    private async UniTaskVoid WallActiveCoroutine()
     {
         ActiveWall(true);
-        yield return new WaitForSeconds(1);
+        await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: this.GetCancellationTokenOnDestroy());
         ActiveWall(false);
     }
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(WallActiveCoroutine());
+        WallActiveCoroutine().Forget();
     }
 }

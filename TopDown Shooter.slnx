@@ -1,0 +1,5 @@
+﻿<Solution>
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="CFXR Runtime.csproj" />
+  <Project Path="CFXREditor.csproj" />
+</Solution>

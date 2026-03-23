@@ -103,14 +103,21 @@ public class Car_Controller : MonoBehaviour
 
     }
 
+    private int lastDisplayedSpeed = -1;
+
     private void Update()
     {
         if (CarActive == false)
             return;
 
-
         Speed = Rb.linearVelocity.magnitude;
-        ui.InGameUI.UpdateSpeedText(Mathf.RoundToInt(Speed * 10) + "km/h");
+
+        int displaySpeed = Mathf.RoundToInt(Speed * 10);
+        if (displaySpeed != lastDisplayedSpeed)
+        {
+            lastDisplayedSpeed = displaySpeed;
+            ui.InGameUI.UpdateSpeedText(displaySpeed + "km/h");
+        }
 
         driftTimer -= Time.deltaTime;
 

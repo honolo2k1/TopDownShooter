@@ -31,7 +31,7 @@ public class PlayerHealth : HealthController
 
     private void ShowFloatingText(int damage)
     {
-        var floatingText = Instantiate(FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        var floatingText = ObjectPool.Instance.GetObject(FloatingTextPrefab, transform.position);
         var text = floatingText.GetComponent<TextMeshPro>();
 
         text.text = $"-{damage}";

@@ -1,9 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
 
 public class UI_ComicPanel : MonoBehaviour, IPointerDownHandler
 {
@@ -14,6 +14,7 @@ public class UI_ComicPanel : MonoBehaviour, IPointerDownHandler
 
     private Image currentImage;
     private int imageIndex;
+    private CancellationTokenSource cts;
 
     private void Start()
     {
@@ -26,23 +27,31 @@ public class UI_ComicPanel : MonoBehaviour, IPointerDownHandler
         {
             return;
         }
-        StartCoroutine(ChangeImageAlpha(1, 1.5f, ShowNextImage));
+        ChangeImageAlpha(1, 1.5f, ShowNextImage).Forget();
     }
-    private IEnumerator ChangeImageAlpha(float targetAlpha, float duration, Action onComplete)
+    private async UniTaskVoid ChangeImageAlpha(float targetAlpha, float duration, Action onComplete)
     {
+        cts?.Cancel();
+        cts = new CancellationTokenSource();
+        var ct = CancellationTokenSource.CreateLinkedTokenSource(cts.Token, this.GetCancellationTokenOnDestroy()).Token;
+
+        int indexToChange = imageIndex;
         float time = 0;
-        Color currentColor = comicPanels[imageIndex].color;
+        Color currentColor = comicPanels[indexToChange].color;
         float startAlpha = currentColor.a;
 
-        while (time < duration)
+        while (time < duration && !comicOver)
         {
             time += Time.deltaTime;
             float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
 
-            comicPanels[imageIndex].color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
-            yield return null;
+            comicPanels[indexToChange].color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
+            await UniTask.Yield(PlayerLoopTiming.Update, ct);
         }
-        comicPanels[imageIndex].color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
+
+        if (comicOver) return;
+
+        comicPanels[indexToChange].color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
 
         imageIndex++;
 
@@ -55,7 +64,7 @@ public class UI_ComicPanel : MonoBehaviour, IPointerDownHandler
     }
     private void FinishComicShow()
     {
-        StopAllCoroutines();
+        cts?.Cancel();
         comicOver = true;
         buttonToEnable.SetActive(true);
         currentImage.raycastTarget = false;

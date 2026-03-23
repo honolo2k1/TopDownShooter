@@ -12,8 +12,20 @@ public class FootstepsVisuals : MonoBehaviour
     [Range(-0.15f, 0.15f)]
     [SerializeField] private float rayDistance = -0.05f;
 
+    private int frameOffset;
+
+    private void Start()
+    {
+        // Randomize offset so not all enemies check on the same frame
+        frameOffset = Random.Range(0, 4);
+    }
+
     private void Update()
     {
+        // Throttle: only check every 4 frames
+        if ((Time.frameCount + frameOffset) % 4 != 0)
+            return;
+
         CheckFootSteps(leftFoot);
         CheckFootSteps(rightFoot);
     }

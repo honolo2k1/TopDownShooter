@@ -12,6 +12,14 @@ public class PooledObject : MonoBehaviour
 
     public void Release()
     {
-        _pool.Release(gameObject);
+        if (_pool != null)
+        {
+            _pool.Release(gameObject);
+        }
+        else
+        {
+            Debug.LogWarning($"[PooledObject] {gameObject.name} has no pool assigned. Destroying.");
+            Destroy(gameObject);
+        }
     }
 }

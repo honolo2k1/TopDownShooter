@@ -1,7 +1,7 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using Cysharp.Threading.Tasks;
+using System;
 using Object = UnityEngine.Object;
 
 public class UI : MonoSingleton<UI>
@@ -35,7 +35,7 @@ public class UI : MonoSingleton<UI>
     {
         AssignInputsUI();
 
-        StartCoroutine(ChangeImageAlpha(0, 1.5f, null));
+        ChangeImageAlpha(0, 1.5f, null).Forget();
 
         if (GameManager.Instance.QuickStart)
         {
@@ -65,14 +65,14 @@ public class UI : MonoSingleton<UI>
             MiniMap.InitMiniMap(MiniMap.CameraHeight);
         }
     }
-    public void StartTheGame() => StartCoroutine(StartGameSequence());
+    public void StartTheGame() => StartGameSequence().Forget();
     public void QuitTheGame() => Application.Quit();
     public void StartLevelGeneration() => LevelGenarator.Instance.InitGeneration();
 
     public void RestartTheGame()
     {
         TimeManager.Instance.ResumeTime();
-        StartCoroutine(ChangeImageAlpha(1, 1f, GameManager.Instance.RestartScene));
+        ChangeImageAlpha(1, 1f, GameManager.Instance.RestartScene).Forget();
     }
 
     public void PauseSwitch()
@@ -104,7 +104,7 @@ public class UI : MonoSingleton<UI>
     public void ShowVictoryScreenUI()
     {
         Cursor.visible = true;
-        StartCoroutine(ChangeImageAlpha(1, 1.5f, SwitchToVictorySreenUI));
+        ChangeImageAlpha(1, 1.5f, SwitchToVictorySreenUI).Forget();
     }
 
     private void SwitchToVictorySreenUI()
@@ -124,41 +124,34 @@ public class UI : MonoSingleton<UI>
         controls.UI.UIPause.performed += conext => PauseSwitch();
     }
 
-    private IEnumerator StartGameSequence()
+    private async UniTaskVoid StartGameSequence()
     {
-        //StartCoroutine(ChangeImageAlpha(1, 1f, null));
-        //yield return new WaitForSeconds(1);
-
-        //SwitchToUI(InGameUI.gameObject);
-        //GameManager.Instance.GameStart();
-
-        //StartCoroutine(ChangeImageAlpha(0, 1f, null));
-
+        var ct = this.GetCancellationTokenOnDestroy();
         bool quickStart = GameManager.Instance.QuickStart;
 
         //THIS SHOULD BE UNCOMMENTED BEFORE MAKING A BUILD
         if (quickStart == false)
         {
             fadeImage.color = Color.black;
-            StartCoroutine(ChangeImageAlpha(1, 1, null));
-            yield return new WaitForSeconds(1);
-
+            ChangeImageAlpha(1, 1, null).Forget();
+            await UniTask.Delay(TimeSpan.FromSeconds(1), cancellationToken: ct);
         }
 
-        yield return null;
+        await UniTask.Yield(PlayerLoopTiming.Update, ct);
         SwitchToUI(InGameUI.gameObject);
         AudioManager.Instance.StopAllBGM();
         GameManager.Instance.GameStart();
 
         if (quickStart)
-            StartCoroutine(ChangeImageAlpha(0, .1f, null));
+            ChangeImageAlpha(0, .1f, null).Forget();
         else
-            StartCoroutine(ChangeImageAlpha(0, 1f, null));
+            ChangeImageAlpha(0, 1f, null).Forget();
 
     }
 
-    private IEnumerator ChangeImageAlpha(float targetAlpha, float duration, Action onComplete)
+    private async UniTaskVoid ChangeImageAlpha(float targetAlpha, float duration, Action onComplete)
     {
+        var ct = this.GetCancellationTokenOnDestroy();
         float time = 0;
         Color currentColor = fadeImage.color;
         float startAlpha = currentColor.a;
@@ -169,7 +162,7 @@ public class UI : MonoSingleton<UI>
             float alpha = Mathf.Lerp(startAlpha, targetAlpha, time / duration);
 
             fadeImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, alpha);
-            yield return null;
+            await UniTask.Yield(PlayerLoopTiming.Update, ct);
         }
         fadeImage.color = new Color(currentColor.r, currentColor.g, currentColor.b, targetAlpha);
 

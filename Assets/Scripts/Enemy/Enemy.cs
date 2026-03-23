@@ -1,8 +1,8 @@
-using System;
-using System.Collections;
-using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
+using Cysharp.Threading.Tasks;
+using System;
+using TMPro;
 using static Enums;
 
 
@@ -53,7 +53,7 @@ public class Enemy : MonoBehaviour
         stateMachine = new EnemyStateMachine();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponentInChildren<Animator>();
-        player = GameObject.Find("Player").GetComponent<Transform>();
+        player = GameManager.Instance.Player.transform;
     }
     public virtual void Start()
     {
@@ -121,18 +121,27 @@ public class Enemy : MonoBehaviour
 
     private void ShowFloatingText(int damage)
     {
-        var floatingText = Instantiate(health.FloatingTextPrefab, transform.position, Quaternion.identity, transform);
+        var floatingText = ObjectPool.Instance.GetObject(health.FloatingTextPrefab, transform.position);
         floatingText.GetComponent<TextMeshPro>().text = $"-{damage}";
     }
 
     public virtual void Die()
     {
+        if (health.IsDead)
+            return;
+
+        health.IsDead = true;
+
         dropController.DropItem();
 
         miniMapDot.SetActive(false);
 
         anim.enabled = false;
-        agent.isStopped = true;
+
+        if (agent.isActiveAndEnabled && agent.isOnNavMesh)
+        {
+            agent.isStopped = true;
+        }
         agent.enabled = false;
 
         ragdoll.RagdollActive(false);
@@ -173,19 +182,26 @@ public class Enemy : MonoBehaviour
     {
         if (health.ShouldDie())
         {
-            StartCoroutine(DeadImpactCoroutine(force, hitPoint, rb));
+            DeadImpactCoroutine(force, hitPoint, rb).Forget();
         }
     }
-    private IEnumerator DeadImpactCoroutine(Vector3 force, Vector3 hitPoint, Rigidbody rb)
+    private async UniTaskVoid DeadImpactCoroutine(Vector3 force, Vector3 hitPoint, Rigidbody rb)
     {
-        yield return new WaitForSeconds(0.1f);
+        await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: this.GetCancellationTokenOnDestroy());
 
         rb.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
     }
 
     public void FaceTarget(Vector3 target, float turnSpeed = 0)
     {
-        Quaternion targetRotation = Quaternion.LookRotation(target - transform.position);
+        Vector3 direction = target - transform.position;
+
+        if (direction.sqrMagnitude < 0.001f)
+        {
+            return;
+        }
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         Vector3 currentEulerAngles = transform.rotation.eulerAngles;
 

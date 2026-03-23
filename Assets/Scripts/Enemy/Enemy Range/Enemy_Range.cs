@@ -132,6 +132,7 @@ public class Enemy_Range : Enemy
 
         newGrenadeScript.SetupGrenade(WhatIsAlly, player.transform.position, TimeToTarget, ExplosionTimer, ImpactPower, GrenadeDamage);
     }
+
     protected override void InitPerk()
     {
         if (WeaponType == Enemy_RangeWeaponType.Random)
@@ -273,18 +274,16 @@ public class Enemy_Range : Enemy
         {
             if (weaponData.WeaponType == WeaponType)
                 filteredData.Add(weaponData);
-            {
-                if (filteredData.Count > 0)
-                {
-                    int random = UnityEngine.Random.Range(0, filteredData.Count);
-                    WeaponData = filteredData[random];
-                }
-                else
-                {
-                    Debug.LogWarning("No avalible weapon data was found!");
-                }
+        }
 
-            }
+        if (filteredData.Count > 0)
+        {
+            int random = UnityEngine.Random.Range(0, filteredData.Count);
+            WeaponData = filteredData[random];
+        }
+        else
+        {
+            Debug.LogWarning("No available weapon data was found for " + WeaponType + "!");
         }
 
         GunPoint = visuals.CurrentWeaponModel.GetComponent<Enemy_RangeWeaponModel>().Gunpoint;

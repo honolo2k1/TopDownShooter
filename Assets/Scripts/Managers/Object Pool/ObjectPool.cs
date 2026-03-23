@@ -1,7 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class ObjectPool : MonoSingleton<ObjectPool>
 {
@@ -16,11 +17,23 @@ public class ObjectPool : MonoSingleton<ObjectPool>
     {
         if (!poolDictionary.ContainsKey(prefab))
         {
-            poolDictionary[prefab] = CreateNewPool(prefab);
+            ObjectPool<GameObject> newPool = CreateNewPool(prefab);
+            poolDictionary[prefab] = newPool;
         }
 
         GameObject instance = poolDictionary[prefab].Get();
+
+        // Detach from pool parent so Rigidbody physics works correctly
+        instance.transform.SetParent(null);
         instance.transform.SetPositionAndRotation(position, rotation);
+
+        // Sync Rigidbody internal position with transform position
+        // Without this, the physics engine keeps the RB at its old position
+        if (instance.TryGetComponent<Rigidbody>(out var rb))
+        {
+            rb.position = position;
+            rb.rotation = rotation;
+        }
 
         return instance;
     }
@@ -37,9 +50,12 @@ public class ObjectPool : MonoSingleton<ObjectPool>
 
     public void ReturnObject(GameObject instance, float delay = 0)
     {
+        if (instance == null || instance.activeSelf == false)
+            return;
+
         if (delay > 0)
         {
-            StartCoroutine(DelayReturn(instance, delay));
+            DelayReturn(instance, delay).Forget();
         }
         else
         {
@@ -55,20 +71,26 @@ public class ObjectPool : MonoSingleton<ObjectPool>
         }
     }
 
-    private IEnumerator DelayReturn(GameObject instance, float delay)
+    private async UniTaskVoid DelayReturn(GameObject instance, float delay)
     {
-        yield return new WaitForSeconds(delay);
-        ReturnObject(instance);
+        await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: this.GetCancellationTokenOnDestroy());
+
+        if (instance != null)
+            ReturnObject(instance);
     }
 
     private ObjectPool<GameObject> CreateNewPool(GameObject prefab)
     {
-        return new ObjectPool<GameObject>(
+        ObjectPool<GameObject> newlyCreatedPool = null;
+
+        newlyCreatedPool = new ObjectPool<GameObject>(
             createFunc: () =>
             {
+                // Create under pool parent (will be detached on Get)
                 GameObject newObj = Instantiate(prefab, transform);
-                PooledObject pooledScript = newObj.AddComponent<PooledObject>();
-                pooledScript.SetPool(poolDictionary[prefab]);
+                newObj.SetActive(false);
+                PooledObject pooledScript = newObj.TryGetComponent<PooledObject>(out var p) ? p : newObj.AddComponent<PooledObject>();
+                pooledScript.SetPool(newlyCreatedPool);
                 return newObj;
             },
             actionOnGet: (obj) =>
@@ -77,7 +99,24 @@ public class ObjectPool : MonoSingleton<ObjectPool>
             },
             actionOnRelease: (obj) =>
             {
+                // Reset Rigidbody state before pooling
+                if (obj.TryGetComponent<Rigidbody>(out var rb))
+                {
+                    rb.linearVelocity = Vector3.zero;
+                    rb.angularVelocity = Vector3.zero;
+                    rb.isKinematic = false;
+                }
+
+                // Reset TrailRenderer to prevent ghost trails
+                if (obj.TryGetComponent<TrailRenderer>(out var trail))
+                {
+                    trail.Clear();
+                }
+
                 obj.SetActive(false);
+
+                // Re-parent back to pool for hierarchy organization
+                obj.transform.SetParent(Instance.transform);
             },
             actionOnDestroy: (obj) =>
             {
@@ -87,5 +126,7 @@ public class ObjectPool : MonoSingleton<ObjectPool>
             defaultCapacity: defaultCapacity,
             maxSize: maxPoolSize
         );
+
+        return newlyCreatedPool;
     }
 }

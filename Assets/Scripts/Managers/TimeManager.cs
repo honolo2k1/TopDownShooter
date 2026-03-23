@@ -1,5 +1,6 @@
-using System.Collections;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class TimeManager : MonoSingleton<TimeManager>
 {
@@ -39,12 +40,13 @@ public class TimeManager : MonoSingleton<TimeManager>
         timeAdjustRate = resumeRate;
         targetTimeScale = 1;
     }
-    public void SlowMotion(float seconds) => StartCoroutine(SlowTimeCoroutine(seconds));
-    private IEnumerator SlowTimeCoroutine(float seconds)
+    public void SlowMotion(float seconds) => SlowTimeCoroutine(seconds).Forget();
+    private async UniTaskVoid SlowTimeCoroutine(float seconds)
     {
+        var ct = this.GetCancellationTokenOnDestroy();
         targetTimeScale = 0.5f;
         Time.timeScale = targetTimeScale;
-        yield return new WaitForSecondsRealtime(seconds);
+        await UniTask.Delay(TimeSpan.FromSeconds(seconds), ignoreTimeScale: true, cancellationToken: ct);
         ResumeTime();
     }
 }

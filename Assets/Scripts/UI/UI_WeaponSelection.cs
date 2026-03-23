@@ -1,7 +1,7 @@
-﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class UI_WeaponSelection : MonoBehaviour
 {
@@ -32,7 +32,7 @@ public class UI_WeaponSelection : MonoBehaviour
     {
         if (AtLeastOneWeaponSelected())
         {
-            StartCoroutine(WaitForLevelGeneration());
+            WaitForLevelGeneration().Forget();
         }
         else
         {
@@ -40,16 +40,13 @@ public class UI_WeaponSelection : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitForLevelGeneration()
+    private async UniTaskVoid WaitForLevelGeneration()
     {
         // Bắt đầu tạo level
         UI.Instance.StartLevelGeneration();
 
         // Chờ cho đến khi generationOver là true
-        while (!LevelGenarator.Instance.generationOver)
-        {
-            yield return null; // Đợi đến frame tiếp theo
-        }
+        await UniTask.WaitUntil(() => LevelGenarator.Instance.generationOver, cancellationToken: this.GetCancellationTokenOnDestroy());
 
         // Sau khi hoàn thành, chuyển sang UI tiếp theo
         UI.Instance.SwitchToUI(nextUIToSwitchOn);

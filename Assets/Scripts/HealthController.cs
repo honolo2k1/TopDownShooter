@@ -28,11 +28,6 @@ public class HealthController : MonoBehaviour
         {
             return false;
         }
-        if (CurrentHealth < 0)
-        {
-            IsDead = true;
-            return true;
-        }
-        return false;
+        return CurrentHealth <= 0;
     }
 }

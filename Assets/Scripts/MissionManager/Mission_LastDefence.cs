@@ -41,6 +41,8 @@ public class Mission_LastDefence : Mission
         }
         return defenceTimer < 0;
     }
+    private int lastDisplayedSecond = -1;
+
     public override void UpdateMission()
     {
         if (!DefenceBegun) return;
@@ -58,12 +60,17 @@ public class Mission_LastDefence : Mission
             waveTimer = WaveCooldown;
         }
 
-        defenceTimerText = System.TimeSpan.FromSeconds(defenceTimer).ToString("mm':'ss");
+        int currentSecond = Mathf.CeilToInt(defenceTimer);
+        if (currentSecond != lastDisplayedSecond)
+        {
+            lastDisplayedSecond = currentSecond;
+            defenceTimerText = System.TimeSpan.FromSeconds(defenceTimer).ToString("mm':'ss");
 
-        string missionText = "Defend yourself till plane ready to take off.";
-        string missionDetails = "Time left: " + defenceTimerText;
+            string missionText = "Defend yourself till plane ready to take off.";
+            string missionDetails = "Time left: " + defenceTimerText;
 
-        UI.Instance.InGameUI.UpdateMissionUI(missionText, missionDetails);
+            UI.Instance.InGameUI.UpdateMissionUI(missionText, missionDetails);
+        }
     }
     private void StartDefenceEvent()
     {

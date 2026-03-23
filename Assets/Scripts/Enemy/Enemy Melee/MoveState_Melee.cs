@@ -20,7 +20,10 @@ public class MoveState_Melee : EnemyState
 
         destination = Enemy.GetPatrolDestination();
 
-        Enemy.agent.SetDestination(destination);
+        if (Enemy.agent.isActiveAndEnabled && Enemy.agent.isOnNavMesh)
+        {
+            Enemy.agent.SetDestination(destination);
+        }
     }
     public override void Update()
     {
@@ -28,9 +31,12 @@ public class MoveState_Melee : EnemyState
 
         Enemy.FaceTarget(GetNextPathPoint());
 
-        if (Enemy.agent.remainingDistance <= Enemy.agent.stoppingDistance + 0.05f)
+        if (Enemy.agent.isActiveAndEnabled && Enemy.agent.isOnNavMesh)
         {
-            stateMachine.ChangeState(Enemy.IdleState);
+            if (Enemy.agent.remainingDistance <= Enemy.agent.stoppingDistance + 0.05f)
+            {
+                stateMachine.ChangeState(Enemy.IdleState);
+            }
         }
     }
 }

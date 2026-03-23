@@ -235,6 +235,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Lock Target"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1b2c3d4-e5f6-7890-abcd-ef1234567890"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -457,6 +466,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Precise Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1f2a3b4-c5d6-7890-abcd-ef9876543210"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2e3d4c5-b6a7-8901-bcde-fa0987654321"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Lock Target"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -621,6 +652,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Character_UIMissionTooltipSwitch = m_Character.FindAction("UI Mission Tooltip Switch", throwIfNotFound: true);
         m_Character_UIPause = m_Character.FindAction("UI Pause", throwIfNotFound: true);
         m_Character_PreciseAim = m_Character.FindAction("Precise Aim", throwIfNotFound: true);
+        m_Character_LockTarget = m_Character.FindAction("Lock Target", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_UIPause = m_UI.FindAction("UI Pause", throwIfNotFound: true);
@@ -727,6 +759,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Character_UIMissionTooltipSwitch;
     private readonly InputAction m_Character_UIPause;
     private readonly InputAction m_Character_PreciseAim;
+    private readonly InputAction m_Character_LockTarget;
     /// <summary>
     /// Provides access to input actions defined in input action map "Character".
     /// </summary>
@@ -803,6 +836,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @PreciseAim => m_Wrapper.m_Character_PreciseAim;
         /// <summary>
+        /// Provides access to the underlying input action "Character/LockTarget".
+        /// </summary>
+        public InputAction @LockTarget => m_Wrapper.m_Character_LockTarget;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_Character; }
@@ -876,6 +913,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PreciseAim.started += instance.OnPreciseAim;
             @PreciseAim.performed += instance.OnPreciseAim;
             @PreciseAim.canceled += instance.OnPreciseAim;
+            @LockTarget.started += instance.OnLockTarget;
+            @LockTarget.performed += instance.OnLockTarget;
+            @LockTarget.canceled += instance.OnLockTarget;
         }
 
         /// <summary>
@@ -935,6 +975,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @PreciseAim.started -= instance.OnPreciseAim;
             @PreciseAim.performed -= instance.OnPreciseAim;
             @PreciseAim.canceled -= instance.OnPreciseAim;
+            @LockTarget.started -= instance.OnLockTarget;
+            @LockTarget.performed -= instance.OnLockTarget;
+            @LockTarget.canceled -= instance.OnLockTarget;
         }
 
         /// <summary>
@@ -1301,6 +1344,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPreciseAim(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Lock Target" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLockTarget(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

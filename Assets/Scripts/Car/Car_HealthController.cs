@@ -1,6 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class Car_HealthController : MonoBehaviour, IDamagable
 {
@@ -58,7 +59,7 @@ public class Car_HealthController : MonoBehaviour, IDamagable
         carController.BrakeTheCar();
 
         fireFx.gameObject.SetActive(true);
-        StartCoroutine(ExplosionCo(explosionDelay));
+        ExplosionCo(explosionDelay).Forget();
     }
 
     public void TakeDamage(int damage)
@@ -67,9 +68,9 @@ public class Car_HealthController : MonoBehaviour, IDamagable
         UpdateCarHealthUI();
     }
 
-    private IEnumerator ExplosionCo(float delay)
+    private async UniTaskVoid ExplosionCo(float delay)
     {
-        yield return new WaitForSeconds(delay);
+        await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: this.GetCancellationTokenOnDestroy());
 
         explosionFx.gameObject.SetActive(true);
         carController.Rb.

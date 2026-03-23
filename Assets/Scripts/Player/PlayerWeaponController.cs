@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
+using System;
 using static Enums;
 
 public class PlayerWeaponController : MonoBehaviour
@@ -41,14 +41,16 @@ public class PlayerWeaponController : MonoBehaviour
         if (isShooting)
             Shoot();
     }
-    private IEnumerator BurstFire()
+    private async UniTaskVoid BurstFire()
     {
         SetWeaponReady(false);
+        var ct = this.GetCancellationTokenOnDestroy();
+
         for (int i = 1; i <= currentWeapon.BulletPerShot; i++)
         {
             FireSingleBullet();
 
-            yield return new WaitForSeconds(currentWeapon.BurstFireDelay);
+            await UniTask.Delay(TimeSpan.FromSeconds(currentWeapon.BurstFireDelay), cancellationToken: ct);
 
             if (i >= currentWeapon.BulletPerShot)
                 SetWeaponReady(true);
@@ -63,7 +65,7 @@ public class PlayerWeaponController : MonoBehaviour
 
         if (currentWeapon.BurstActived() == true)
         {
-            StartCoroutine(BurstFire());
+            BurstFire().Forget();
             return;
         };
 

@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.Intrinsics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,9 +7,18 @@ public class Enemy_Health : HealthController
     public GameObject HealthBar;
 
     public GameObject FloatingTextPrefab;
+
+    private Transform cachedCameraTransform;
+
+    private void Start()
+    {
+        cachedCameraTransform = Camera.main.transform;
+    }
+
     private void Update()
     {
-        HealthBar.transform.rotation = Quaternion.LookRotation(Camera.main.transform.forward);
+        if (cachedCameraTransform != null)
+            HealthBar.transform.rotation = Quaternion.LookRotation(cachedCameraTransform.forward);
     }
     public void UpdateHeathUI(float currentHealth, float maxHealth)
     {

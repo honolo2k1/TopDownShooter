@@ -6674,12 +6674,14 @@ MonoBehaviour:
   aim: {fileID: 1010537333}
   isAimingPrecisly: 0
   offsetChangeRate: 6
-  preciseAim:
+  aimLayerMask:
     serializedVersion: 2
-    m_Bits: 10433
-  regularAim:
+    m_Bits: 2113
+  lockOnRange: 30
+  lockOnAngle: 60
+  enemyLayer:
     serializedVersion: 2
-    m_Bits: 10432
+    m_Bits: 2048
   cameraTarget: {fileID: 161717561}
   minCameraDistance: 1
   maxCameraDistance: 2

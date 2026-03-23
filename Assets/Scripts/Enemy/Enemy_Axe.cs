@@ -38,6 +38,13 @@ public class Enemy_Axe : MonoBehaviour
         this.flySpeed = flySpeed;
         this.player = player;
         this.timer = timer;
+
+        // Reset physics state for pool reuse
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {

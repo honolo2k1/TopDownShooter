@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class AudioManager : MonoSingleton<AudioManager>
 {
@@ -38,7 +40,7 @@ public class AudioManager : MonoSingleton<AudioManager>
         if (sfx == null)
             return;
 
-        float pitch = Random.Range(minPitch, maxPitch);
+        float pitch = UnityEngine.Random.Range(minPitch, maxPitch);
 
         sfx.pitch = pitch;
         sfx.Play();
@@ -46,7 +48,7 @@ public class AudioManager : MonoSingleton<AudioManager>
 
     public void SFXDelayAndFade(AudioSource source, bool play, float taretVolume, float delay = 0, float fadeDuratuin = 1)
     {
-        StartCoroutine(SFXDelayAndFadeCo(source, play, taretVolume, delay, fadeDuratuin));
+        SFXDelayAndFadeCo(source, play, taretVolume, delay, fadeDuratuin).Forget();
     }
 
     public void PlayBGM(int index)
@@ -73,7 +75,7 @@ public class AudioManager : MonoSingleton<AudioManager>
     public void PlayRandomBGM()
     {
         StopAllBGM();
-        bgmIndex = Random.Range(0, bgm.Length);
+        bgmIndex = UnityEngine.Random.Range(0, bgm.Length);
         PlayBGM(bgmIndex);
     }
 
@@ -88,9 +90,12 @@ public class AudioManager : MonoSingleton<AudioManager>
         return false;
     }
 
-    private IEnumerator SFXDelayAndFadeCo(AudioSource source,bool play, float targetVolume, float delay = 0, float fadeDuration = 1)
+    private async UniTaskVoid SFXDelayAndFadeCo(AudioSource source, bool play, float targetVolume, float delay = 0, float fadeDuration = 1)
     {
-        yield return new WaitForSeconds(delay);
+        var ct = this.GetCancellationTokenOnDestroy();
+
+        if (delay > 0)
+            await UniTask.Delay(TimeSpan.FromSeconds(delay), cancellationToken: ct);
 
         float startVolume = play ? 0 : source.volume;
         float endVolume = play ? targetVolume : 0;
@@ -106,8 +111,8 @@ public class AudioManager : MonoSingleton<AudioManager>
         while (elapsed < fadeDuration)
         {
             elapsed += Time.deltaTime;
-            source.volume = Mathf.Lerp(startVolume,endVolume, elapsed/ fadeDuration);
-            yield return null;
+            source.volume = Mathf.Lerp(startVolume, endVolume, elapsed / fadeDuration);
+            await UniTask.Yield(PlayerLoopTiming.Update, ct);
         }
 
         source.volume = endVolume;
